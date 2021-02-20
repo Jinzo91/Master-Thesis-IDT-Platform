@@ -1,0 +1,47 @@
+<mat-card class="subscription-card" *ngIf="isLoading">
+    <mat-card-content>
+        <h3>
+            Activating your IDT weekly subscription!
+        </h3>
+        <p>
+            Please stand by for a little moment as we are activating your subscription.
+        </p>
+        <p class="loading-indicator">
+            Loading ...
+        </p>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="subscription-card" *ngIf="!isLoading && resultType === 'success'">
+    <mat-card-content>
+        <h3>
+            Subscription is activated!
+        </h3>
+        <p>
+            Your IDT weekly subscription is now active. Now you will always be up to date with the latest intel on
+            digital transformation!
+        </p>
+        <p class="loading-indicator">
+            <button *ngIf="!isLoading" mat-raised-button (click)="goToDashboard()">
+                go to dashboard
+            </button>
+        </p>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="subscription-card" *ngIf="!isLoading && resultType === 'error'">
+    <mat-card-content>
+        <h3>
+            Error!
+        </h3>
+        <p>
+            Unfortunately your subscription could not be activated. Maybe it already is active or you have clicked the
+            wrong link. If neither is the case please try again later.
+        </p>
+        <p class="loading-indicator">
+            <button *ngIf="!isLoading" mat-raised-button (click)="goToDashboard()">
+                go to dashboard
+            </button>
+        </p>
+    </mat-card-content>
+</mat-card>

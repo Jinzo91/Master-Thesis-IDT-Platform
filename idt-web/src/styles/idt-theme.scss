@@ -1,0 +1,74 @@
+@import '../../node_modules/@angular/material/theming';
+@include mat-core();
+
+$idt-primary: (
+    50 : #e4e7ee,
+    100 : #bcc3d6,
+    200 : #909bba,
+    300 : #64739e,
+    400 : #42558a,
+    500 : #213775,
+    600 : #1d316d,
+    700 : #182a62,
+    800 : #142358,
+    900 : #0b1645,
+    A100 : #acd3ff,
+    A200 : #9fc5e8,
+    A400 : #6fa8dc,
+    A700 : #3d85c6,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$idt-accent: (
+    50 : #f0f6ff,
+    100 : #dae9ff,
+    200 : #c1dbff,
+    300 : #a8cdff,
+    400 : #95c2ff,
+    500 : #82b7ff,
+    600 : #7ab0ff,
+    700 : #6fa7ff,
+    800 : #659fff,
+    900 : #5290ff,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #f7faff,
+    A700 : #dee9ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+$idt-primary: mat-palette($idt-primary);
+$idt-accent: mat-palette($idt-accent);
+$my-theme-warn: mat-palette($mat-red);
+
+$my-theme: mat-light-theme($idt-primary, $idt-accent, $my-theme-warn);
+@include angular-material-theme($my-theme);

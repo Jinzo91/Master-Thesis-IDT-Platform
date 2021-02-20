@@ -1,0 +1,9 @@
+<div class="idt-add-img-dialog__img-container">
+  <p>Loaded Image:</p>
+  <img class="idt-add-img-dialog__preview-img margin-y-m" [src]="(this.imgString$ | async)">
+  <div>
+    <button mat-stroked-button class="margin-right-m" [mat-dialog-close] color="primary">Back</button>
+    <button mat-raised-button [mat-dialog-close]="data" color="primary">Save</button>
+  </div>
+</div>
+

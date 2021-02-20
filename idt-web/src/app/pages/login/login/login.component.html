@@ -1,0 +1,26 @@
+<div class="idt-login-page">
+
+  <div class="idt-login__left-half">
+    <div class="idt-login__form-wrapper">
+      <h3 class="idt-login__headline margin-top-0"> Initiative for Digital Transformation</h3>
+      <p>Welcome back! Please log in:</p>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="idt-login__form">
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email" required>
+          <mat-error> {{emailErrorMessage}} </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
+          <mat-error> {{passwordErrorMessage}} </mat-error>
+        </mat-form-field>
+        <div class="idt-login__buttons">
+          <button mat-raised-button color="primary" [disabled]="loginForm.invalid" type="submit"> Login </button>
+          <button (click)="openForgotPasswordDialog($event)" mat-button> Forgot Password </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="idt-login__right-half">
+  </div>
+</div>

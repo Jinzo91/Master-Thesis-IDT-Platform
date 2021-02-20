@@ -1,0 +1,140 @@
+@import "src/styles/idt-theme.scss";
+@import 'src/styles/breakpoints.scss';
+
+.idt-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.idt-header__wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.idt-mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 2;
+  color: white;
+  background: mat-color($idt-primary, 500);
+  height: 0;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+  transition: height 0.25s;
+
+  a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    font-size: 18px;
+  }
+
+  a:active {
+    color: mat-color($idt-accent, 700);
+  }
+
+  .mat-raised-button {
+    color: black;
+    font-size: 18px;
+    width: 50%;
+    border: 1px solid white;
+  }
+}
+
+.idt-mobile-menu.is-opened {
+  width: 100%;
+  height: 400px;
+  transition: height 0.25s ease-out;
+  padding: 20px 0;
+  z-index: 101;
+}
+
+.idt-mobile-menu__close {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.idt-logo {
+  height: 30px;
+  width: auto;
+}
+
+.idt-header__search-form {
+  margin: 9px 0 0 16px;
+
+  ::ng-deep .mat-form-field {
+    .mat-input-element,
+    .mat-form-field-label,
+    .mat-form-field-required-marker {
+        color: white;
+    }
+    
+    .mat-form-field-ripple {
+        background-color: white;
+    }
+
+    .mat-form-field-underline {
+      background-color: transparent;
+    }
+}
+
+  ::ng-deep .mat-form-field {
+    @media(max-width: map-get($breakpoints, medium)) {
+      max-width: 80px;
+      width: 100%;
+    }
+  }
+
+  ::ng-deep .mat-form-field.mat-focused,
+  ::ng-deep .mat-form-field.is-filled {
+
+    .mat-form-field-underline {
+        background-color: white;
+    }
+
+    @media(max-width: map-get($breakpoints, medium)) {
+      max-width: 500px;
+      width: 100%;
+    }
+  }
+
+  ::ng-deep .mat-form-field-suffix {
+    width: 20px;
+  }
+}
+
+.idt-header__search-form .mat-icon {
+  height: unset;
+  width: unset;
+}
+
+:host ::ng-deep .idt-header__search-form .mat-form-field-infix {
+  font-size: 16px;
+}
+
+.idt-search-icon {
+  font-size: 20px !important;
+  cursor: pointer;
+  color: white;
+  position: absolute;
+  bottom: -5px;
+  right: 0;
+}
+
+.idt-header__menu-wrapper {
+  display: flex;
+  align-items: center;
+}

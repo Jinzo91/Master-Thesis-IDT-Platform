@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: idtdb
+  namespace: idt
+spec:
+  selector:
+    app: idtdb
+  ports:
+    - protocol: TCP
+      port: 1433
+      targetPort: 1433
+      nodePort: 30010
+  type: NodePort

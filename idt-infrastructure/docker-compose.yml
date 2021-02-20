@@ -1,0 +1,53 @@
+version: '3'
+
+
+services:
+  idt-proxy:
+    image: idtcr.azurecr.io/idt-proxy:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - "idt-web"
+      - "idt-api"
+    restart: always    
+
+  idt-web:
+    image: idtcr.azurecr.io/idt-web:latest
+    environment:
+      - CONFIGURATION=dockerprod
+    restart: always
+
+  idt-api:
+    image: idtcr.azurecr.io/idt-api:latest
+    environment:
+      - NODE_ENV=staging
+    depends_on:
+      - "idt-db"
+      - "idt-documentdb"
+    restart: always
+
+  idt-db:
+    image: idtcr.azurecr.io/idt-db:latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=IDTRocks2019!
+      - MSSQL_PID=Standard
+    volumes:
+        - mssql-volume:/var/opt/mssql
+    restart: always
+
+  idt-documentdb:
+    image: mongo
+    volumes:
+      - mongo-volume:/data/db
+    ports:
+      - "27017:27017"
+    restart: always    
+
+
+volumes:
+  mssql-volume: ${WEBAPP_STORAGE_HOME}/mssql2
+  mongo-volume: ${WEBAPP_STORAGE_HOME}/mongo2
+
+  # mssql-volume: 
+  # mongo-volume:

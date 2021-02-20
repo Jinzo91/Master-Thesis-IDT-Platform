@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: idt-ingress
+  namespace: company-source
+  annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: "131.159.56.0/24"
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
+spec:
+  tls:
+    - hosts:
+      - vmkrcmar102.in.tum.de
+      secretName: idt-tls-secret
+  rules:
+    - host: vmkrcmar102.in.tum.de
+      http:
+        paths:
+        - path: /company-source
+          backend:
+            serviceName: idtapi
+            servicePort: 80

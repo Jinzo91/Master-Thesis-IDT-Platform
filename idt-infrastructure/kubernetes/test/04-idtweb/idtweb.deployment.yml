@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idtweb
+  namespace: idt-test
+spec:
+  selector:
+    matchLabels:
+      app: idtweb
+  template:
+    metadata:
+      labels:
+        app: idtweb
+        type: deployable
+    spec:
+      containers:
+      - name: idtweb
+        image: idtcr.azurecr.io/idt-web:test
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: idtcr

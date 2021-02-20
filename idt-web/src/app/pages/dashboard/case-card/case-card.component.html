@@ -1,0 +1,23 @@
+<!-- <div class="idt-case-card" (click)="goToDetails(case.id)"> -->
+  <div class="idt-case-card__image-wrapper" [style.background-image]="'url(' + case.image + ')'">
+  </div>
+  <div class="idt-case-card__content">
+    <div class="idt-case-card__title-tag-wrapper">
+      <h4 class="idt-case-card__headline">
+        {{case.title}}<br>
+      <div class="idt-carousel__date-tag-wrapper">
+        <span class="idt-case-card__date">{{case.creationDate | date}}</span>
+        <div class="idt-case-card__tag idt-case-card__tag--company">{{case.company}}</div>
+
+        <div class="idt-case-card__tag" (click)="tagClicked($event, case.tags[0])" *ngIf="case.tags[0]">{{case.tags[0]?.name}}</div>
+        <div class="idt-case-card__tag" (click)="tagClicked($event, case.tags[1])" *ngIf="case.tags[1]">{{case.tags[1]?.name}}</div>
+
+      </div>
+
+      </h4>
+    </div>
+    <p class="idt-case-card__description">
+      {{case.description}}
+    </p>
+  </div>
+<!-- </div> -->

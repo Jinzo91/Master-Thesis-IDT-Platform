@@ -1,0 +1,111 @@
+@import 'src/styles/breakpoints.scss';
+@import "src/styles/idt-theme.scss";
+
+.idt-suggested-company {
+  width: auto;
+  flex-grow: 1;
+  height: 230px;
+  box-shadow: 0 0 12px 0 #d7d7d7;
+  margin: 20px 8px 10px 8px;
+  position: relative;
+  display: inline-block;
+  background-color: white;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px 30px;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    height: 250px;
+  }
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    height: 250px;
+  }
+}
+
+.idt-suggested-company:hover{
+  cursor: pointer;
+}
+
+.idt-suggested-company-logo {
+  img{
+    height: 70px;
+    width: 70px;
+  }
+}
+
+.idt-suggested-company-name {
+  font-weight: bold;
+  margin: 10px 0;
+  height: 40px;
+}
+
+.idt-suggested-company-industry {
+  height: 40px;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    height: 60px;
+  }
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    height: 60px;
+  }
+}
+
+.idt-company-follow {
+  position: relative;
+  border: 2px solid #213775;
+  border-radius: 20px;
+  text-align: center;
+  background-color: white;
+  color: #213775;
+  padding: 5px;
+  font-weight: bold;
+  margin: 10px auto;
+  width: 90px;
+  height: 20px;
+}
+
+.idt-company-follow:hover{
+  color: white;
+  background-color: #213775;
+  cursor: pointer
+}
+
+.idt-company-unfollow{
+  border: 2px solid #213775;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #213775;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  margin: 10px auto;
+  width: 90px;
+  height: 20px;
+}
+
+.idt-company-unfollow:hover {
+  cursor: pointer;
+}
+
+// @keyframes spinner {
+//   to {transform: rotate(360deg);}
+// }
+
+// .spinner:before {
+//   content: '';
+//   box-sizing: border-box;
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   width: 20px;
+//   height: 20px;
+//   margin-top: -10px;
+//   margin-left: -10px;
+//   border-radius: 50%;
+//   border: 2px solid #ffffff;
+//   border-top-color: #000000;
+//   animation: spinner .8s linear infinite;
+// }

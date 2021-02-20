@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idtdb
+  namespace: idt-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: idtdb
+  template:
+    metadata:
+      labels:
+        app: idtdb
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: idtdb
+        image: mcr.microsoft.com/mssql/server:2017-latest
+        ports:
+        - containerPort: 1433
+        env:
+        - name: MSSQL_PID
+          value: "Standard"
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: MSSQL_SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mssql
+              key: SA_PASSWORD 
+        volumeMounts:
+        - name: mssql-test
+          mountPath: /var/opt/mssql
+      volumes:
+      - name: mssql-test
+        persistentVolumeClaim:
+          claimName: mssql-claim-test

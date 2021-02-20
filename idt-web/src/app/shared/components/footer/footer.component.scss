@@ -1,0 +1,135 @@
+@import 'src/styles/breakpoints.scss';
+
+.idt-footer {
+  background-color: #213775;
+  padding: 12px 24px;
+}
+
+.idt-bottom-footer {
+  color: white;
+  font-size: 12px;
+  background-color: darken(#213775, 10%);
+}
+
+.idt-footer__wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    justify-content: center;
+  }
+}
+
+.idt-footer__subscription {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    justify-content: center;
+  }
+
+  color: white;
+
+  h3 {
+    margin: 0;
+  }
+
+  mat-form-field {
+    margin-right: 15px;
+  }
+
+  /* Change label color */
+  ::ng-deep .mat-form-field .mat-form-field-label {
+    color: white;
+  }
+
+  ::ng-deep .mat-form-field .mat-input-element {
+    caret-color: white;
+  }
+
+  /* underline border color */
+  ::ng-deep  .mat-form-field .mat-form-field-underline {
+    background-color: white !important;
+  }
+
+  /* Change label color on focused */
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: white !important;
+  }
+
+  /* underline border color on focused */
+  ::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
+    background-color: white !important;
+  }
+}
+
+.idt-footer__links {
+  flex: 1
+}
+
+.idt-footer__copyright {
+  width: 100%;
+  text-align: center;
+}
+
+.idt-footer__links  {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+
+  a {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  a + a {
+    margin-top: 8px;
+  }
+}
+
+.about {
+  color: white;
+
+  h3 {
+    text-align: right;
+    margin: 0;
+  }
+
+  p {
+    text-align: right;
+    font-size: 14px;
+  }
+
+  @media(max-width: map-get($breakpoints, desktop)) {
+    display: none;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.idt-bottom-header__wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    flex-direction: column;
+  }
+}

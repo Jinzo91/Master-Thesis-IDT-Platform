@@ -1,0 +1,42 @@
+<div class="idt-header">
+  <mat-toolbar color="primary">
+    <div class="idt-header__wrapper">
+      <div class="idt-header__navigation desktop">
+        <img (click)="goToHomepage()" class="idt-logo" src="../../../assets/images/idt-logo.png">
+        <nav mat-tab-nav-bar class="idt-header__links">
+          <a mat-tab-link
+            *ngFor="let link of navLinks"
+            [routerLink]="link.path"
+            routerLinkActive #rla="routerLinkActive"
+            [routerLinkActiveOptions]="{exact:true}"
+            [active]="isLinkActive(rla, link.path)">
+          {{link.label}}
+          </a>
+        </nav>
+        <form class="idt-header__search-form" [formGroup]="searchForm">
+          <mat-form-field appearance="outline">
+              <input matInput (input)="onSearch()" placeholder="Search IDT..." formControlName="query">
+              <mat-icon class="idt-search-icon" matSuffix>search</mat-icon>
+          </mat-form-field>
+        </form>
+      </div>
+      <button *ngIf="!(userLoggedIn$ | async)" mat-button color="accent"
+              routerLink="/login">Login</button>
+      <div *ngIf="userLoggedIn$ | async" class="account-area">{{getUserName()}}
+        <button class="account-icon"  (click)="checkAdmin()" mat-button [matMenuTriggerFor]="menu"><mat-icon class="big-icon">account_circle</mat-icon></button>{{firstName}}
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="goToProfilePage()">
+            <span>Profile</span>
+          </button>
+          <button *ngIf="userAdmin" mat-menu-item (click)="goToAdminPage()">
+            <span>Invite User</span>
+          </button>
+          <button *ngIf="userAdmin" mat-menu-item (click)="goToBotPage()">
+            <span>Bot Cases</span>
+          </button>
+          <button (click)="logout()" mat-menu-item>Logout</button>
+        </mat-menu>
+      </div>
+    </div>
+  </mat-toolbar>
+</div>

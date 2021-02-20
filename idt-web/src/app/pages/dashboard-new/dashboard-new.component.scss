@@ -1,0 +1,191 @@
+@import 'src/styles/breakpoints.scss';
+
+.dashboard {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+
+.chart-container{
+  background-color: #213775;
+  margin: 5px;
+  padding: 30px 20px 20px 20px;
+  min-height: 344px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+}
+
+
+.small {
+  width: calc(15vw - 5px);
+  height: 40vh;
+  box-sizing: border-box;
+
+  @media(max-width: map-get($breakpoints, large)) {
+    width: 270px;
+  }
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    width: 270px;
+  }
+
+  @media(max-width: map-get($breakpoints, small)) {
+    width: 400px;
+  }
+}
+
+.medium {
+  width: 30vw;
+  height: 40vh;
+  box-sizing: border-box;
+
+  @media(max-width: map-get($breakpoints, large)) {
+    width: 560px;
+  }
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    width: 560px;
+  }
+
+  @media(max-width: map-get($breakpoints, small)) {
+    width: 400px;
+    height: 60vh;
+  }
+}
+
+.large {
+  width: 30vw;
+  height: 80vh;
+  box-sizing: border-box;
+
+  @media(max-width: map-get($breakpoints, large)) {
+    width: 560px;
+  }
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    width: 560px;
+  }
+
+  @media(max-width: map-get($breakpoints, small)) {
+    width: 400px;
+  }
+}
+
+.small-vertical-bar-chart {
+  width: 260px;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    width: auto;
+  }
+}
+
+.options {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.chart-title{
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #fff;
+  padding: 0 10px 10px;
+}
+
+
+.change-container{
+  width: 100%;
+  font-size: 1.8rem;
+}
+
+.change{
+  width: calc(50% - 25px);
+  display: inline-block;
+  text-align: left;
+  padding-left:25px;
+}
+
+.case-change{
+  color: #16c11e;
+}
+
+.company-change{
+  color: #f74d2f;
+}
+
+.list{
+  color: #fff;
+}
+
+.idt-info-icon, .idt-settings-icon {
+  color: white;
+  font-size: 150%;
+  margin-right: 5px;
+}
+
+
+.keyvalue {
+  color: white;
+  display: block;
+  margin: 10px;
+  padding: 10px;
+
+  .keyvalue-number {
+    font-size: 4rem;
+    margin-bottom: 15px;
+
+    @media(max-width: map-get($breakpoints, small)) {
+      font-size: 2.5rem;
+    }
+  }
+
+  .keyvalue-text{
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+
+  .keyvalue-change-text{
+    margin: 5px;
+
+    .keyvalue-decrease{
+      color: #f74d2f;
+    }
+
+    .keyvalue-increase{
+      color: #16c11e;
+    }
+  }
+}
+
+.minimalistic-chart{
+  margin-left: -30px;
+}
+
+.mat-row:hover {
+  background-color: #2f4685;
+  cursor: pointer;
+}
+
+table{
+  background-color: #213775 !important;
+  width: 100%;
+}
+
+th, td {
+  color: white !important;
+  text-align: center !important;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  border-color: white;
+}
+
+.error {
+  color: white;
+  margin: auto;
+  width: fit-content;
+}

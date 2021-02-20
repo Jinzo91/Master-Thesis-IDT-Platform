@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: idt-ingress
+  namespace: idt
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
+spec:
+  # tls:
+  # - hosts:
+  #   - quotes.dev.kube
+  #   - quotes-api.dev.kube
+  #   secretName: ingress-cert
+  rules:
+    - host: web.dev.kube
+      http:
+        paths:
+        - path: /daemon
+          backend:
+            serviceName: idtdaemon
+            servicePort: 80
+    - host: web.dev.kube
+      http:
+        paths:
+        - path: /api
+          backend:
+            serviceName: idtapi
+            servicePort: 80
+    - host: web.dev.kube
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: idtweb
+            servicePort: 80
+    # - host: web.dev.kube
+    #   http:
+    #     paths:
+    #     - path: /
+    #       backend:
+    #         serviceName: kubernetes-dashboard
+    #         servicePort: 80

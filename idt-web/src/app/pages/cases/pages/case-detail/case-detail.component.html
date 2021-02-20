@@ -1,0 +1,333 @@
+<div idtDragDrop class="idt-details__geom-image" [style.background-image]="'url(' + image + ')'"
+  (mouseenter)="mouseOverImg = true" (mouseleave)="mouseOverImg = false" (click)="editing && fileInput.click()"
+  (OnFileDropped)="editing && uploadImage($event)">
+  <input #fileInput hidden type="file" accept="image/*" (change)="uploadImage($event.target.files)">
+  <div *ngIf="editing" class="idt-details__edit-img" [class.idt-details__geom-image--edited]="editing && mouseOverImg"
+       aria-hidden="false" aria-label="Add new Image">
+    <mat-icon>add</mat-icon> Change background image
+  </div>
+</div>
+<div class="idt-case-detail">
+  <form [formGroup]="caseEditForm">
+    <div class="idt-case-detail__card">
+
+      <div class="idt-case-detail__left">
+        <div class="idt-mobile margin-bottom-m">
+          <a mat-stroked-button class="idt-case-detail__mobile-back-button" color="primary" (click)="onBack()"> {{ backLabel }} </a>
+        </div>
+        <div class="idt-mobile margin-left-xs margin-right-xs">
+          <mat-form-field class="idt-case-detail__title">
+            <textarea cdkTextareaAutosize matInput formControlName="title"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="idt-details__actions idt-mobile margin-bottom-s">
+          <button mat-raised-button color="accent" style="margin-right: 1rem;" *ngIf="this.case.createdBy.lastName==='Bot'" (click)="onAddCase()">Add to cases</button>
+          <button class="idt-icon-button margin-right-xs" *ngIf="isAdmin() && !case.disabled" mat-stroked-button
+            color="warn" (click)="disableCase()">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button *ngIf="isAdmin() && case.disabled" mat-raised-button color="accent" (click)="enableCase()">
+            Enable
+          </button>
+          <button class="margin-right-xs" *ngIf="editingAllowed() && editing" mat-stroked-button color="primary"
+            (click)="cancel()">
+            Cancel
+          </button>
+          <button *ngIf="editingAllowed() && !editing" [disabled]="case.disabled" class="idt-icon-button"
+            mat-stroked-button color="primary" (click)="toggleEdit()">
+            <mat-icon [matTooltip]="case.disabled ? 'You can edit only active cases.' : null"
+              matTooltipClass="idt-tooltip">edit</mat-icon>
+          </button>
+          <button *ngIf="editingAllowed() && editing" class="margin-right-s" mat-raised-button color="primary"
+            (click)="toggleEdit()">
+            {{submitLabel}}
+          </button>
+        </div>
+        <a mat-stroked-button color="primary" class="margin-right-s idt-desktop idt-case-detail__back-button"
+          (click)="onBack()"> {{ backLabel }} </a>
+        <div class="idt-case-detail__company">
+          <div class="idt-case-detail__img-div">
+            <img class="idt-case__title-img" (error)="defaultImage()" [src]="caseEditForm.controls.logo.value">
+          </div>
+
+        </div>
+        <div class="idt-case-detail__basic-info">
+
+          <div *ngIf="editing" class="idt-case-detail__row margin-bottom-3m">
+            <span class="idt-case__form-label">Featured
+              <i class="material-icons idt-info-icon"
+                matTooltip="A featured case study will appear under hot cases on the dashboard page."
+                matTooltipClass="idt-tooltip" aria-label="">info</i>
+            </span>
+            <mat-slide-toggle color="primary" formControlName="featured"></mat-slide-toggle>
+          </div>
+
+          <div class="idt-case-detail__info-title">Basic information</div>
+          <div class="idt-case-detail__row">
+            <span class="idt-case__form-label">Company</span>
+
+            <mat-form-field *ngIf="editing">
+              <mat-select formControlName="company">
+                <mat-option>
+                  <ngx-mat-select-search
+                    [formControl]="serverSideFilteringCtrl"
+                    [searching]="isSearchingForCompanies"
+                    placeholderLabel="Search"
+                    noEntriesFoundLabel="No entries found">
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let company of filteredServerSideCompanies$ | async" [value]="company.id"
+                  [innerHTML]="company.name | highlight: serverSideFilteringCtrl.value">
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <idt-link *ngIf="!editing" [link]="getCompanyUrl(caseEditForm.controls.company.value)"
+              [linkText]="case.company.name"></idt-link>
+          </div>
+
+          <div class="idt-case-detail__row" [class.idt-with-margin]="!editing">
+            <span class="idt-case__form-label">Url</span>
+            <mat-form-field *ngIf="editing">
+              <input matInput formControlName="url">
+            </mat-form-field>
+            <idt-link *ngIf="!editing" [href]="getAbsoluteCaseLink(caseEditForm.controls.url.value)"
+              [linkText]="caseEditForm.controls.url.value"></idt-link>
+          </div>
+
+          <div *ngIf="case.technologies?.length > 0" class="idt-case-detail__info-title margin-top-3m">
+            Technologies used</div>
+
+          <div class="idt-case-detail__row" *ngIf="!editing">
+            <mat-chip-list>
+              <mat-chip class="idt-case-detail__tech-tag" (click)="goToFilteredCasePage(tech)" color="primary" *ngFor="let tech of case.technologies">
+                {{tech.name}}
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+          <idt-tag-autocomplete
+            *ngIf="editing"
+            [allTags]="allTechnologies$"
+            [selectedTags]="caseTechnologies"
+            (tagAdded)="addTag($event)"
+            (tagRemoved)="removeTag($event)">
+          </idt-tag-autocomplete>
+
+          <div class="idt-case-detail__info-title margin-top-3m">Metadata</div>
+
+          <div class="idt-case-detail__row">
+            <span class="idt-case__form-label">Author</span>
+            <mat-form-field>
+              <input matInput disabled="true" [value]="case.createdBy.lastName + ', ' + case.createdBy.firstName">
+            </mat-form-field>
+          </div>
+
+          <div class="idt-case-detail__row">
+            <span class="idt-case__form-label">Created at</span>
+            <mat-form-field>
+              <input matInput disabled="true" [value]="case.createdAt | date">
+            </mat-form-field>
+          </div>
+
+          <div class="idt-case-detail__row">
+            <span class="idt-case__form-label">Modified at</span>
+            <mat-form-field>
+              <input matInput disabled="true" [value]="case.modifiedAt | date">
+            </mat-form-field>
+          </div>
+          <mat-chip-list *ngIf="isAdmin() && case.disabled">
+            <mat-chip color="warn" selected>Disabled</mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+
+      <div class="idt-case-detail__right">
+        <div class="idt-case-details__content">
+          <div class="idt-desktop idt-case-detail__title-wrapper idt-case-details__title-star">
+            <mat-form-field class="idt-case-detail__title">
+              <textarea cdkTextareaAutosize matInput formControlName="title"></textarea>
+              <mat-error> Field required! </mat-error>
+            </mat-form-field>
+            <mat-icon *ngIf="case.featured" class="idt-case-details__featured-star"
+              matTooltip="This is a featured case study." matTooltipClass="idt-tooltip">star</mat-icon>
+
+          </div>
+
+          <div class="idt-details__actions idt-desktop">
+            <button mat-raised-button color="accent" style="margin-right: 1rem;" *ngIf="this.case.createdBy.lastName==='Bot'" (click)="onAddCase()">Add to cases</button>
+            <button class="idt-icon-button margin-right-xs" *ngIf="isAdmin() && !case.disabled" mat-stroked-button
+              color="warn" (click)="disableCase()">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button class="margin-right-xs" *ngIf="isAdmin() && case.disabled" mat-raised-button color="accent"
+              (click)="enableCase()">
+              Enable
+            </button>
+            <button class="margin-right-xs" *ngIf="editingAllowed() && editing" mat-stroked-button color="primary"
+              (click)="cancel()">
+              Cancel
+            </button>
+            <button *ngIf="editingAllowed() && !editing" [disabled]="case.disabled" class="idt-icon-button"
+              mat-stroked-button color="primary" (click)="toggleEdit()">
+              <mat-icon [matTooltip]="case.disabled ? 'You can edit only active cases.' : null"
+                matTooltipClass="idt-tooltip">edit</mat-icon>
+            </button>
+            <button *ngIf="editingAllowed() && editing" class="margin-right-s" mat-raised-button color="primary"
+              (click)="toggleEdit()" [disabled]="!caseEditForm.valid">
+              {{submitLabel}}
+            </button>
+          </div>
+
+          <div class="idt-case-detail__description-row">
+            <mat-form-field  *ngIf="editing" class="idt-case-detail__description-input">
+              <textarea cdkTextareaAutosize matInput formControlName="description" [maxlength]="descriptionMaxLength"></textarea>
+              <mat-hint>{{descriptionLengthRemaining$ | async}}/{{descriptionMaxLength}} characters left </mat-hint>
+              <mat-error> Field required! </mat-error>
+            </mat-form-field>
+            <div #caseDescription *ngIf="!editing" class="idt-case-detail__description">
+              {{case.description}}
+            </div>
+            <button *ngIf="isDescriptionTooLong && !editing" class="idt-case-detial__read-more-button"
+              (click)="toggleDescriptionExpansion()" mat-button color="primary">
+              {{ descriptionExpansionLabel }}
+              <i *ngIf="!descriptionExpanded" class="material-icons">expand_more</i>
+              <i *ngIf="descriptionExpanded" class="material-icons">expand_less</i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+<div class="idt-case-detail__sources-wrapper">
+    <h3 class="margin-right-s"> Case sources</h3>
+    <div class="idt-case-detail__source-title">
+      <h4 class="margin-right-s">Files</h4>
+      <button *ngIf="editing" mat-raised-button color="primary"
+              (click)="openAddSourceModal(sourceType.File)"> Add new file </button>
+    </div>
+    <div class="mat-elevation-z8 margin-bottom-l" [class.is-hidden]="sourcesEmpty$ | async">
+      <table class="idt-case-detail__sources-list" mat-table [dataSource]="fileSourceList$ | async" matSort>
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell class="idt-case-detail__icon-cell" *matCellDef="let row">
+            <mat-icon class="idt-case-detail__file-icon"
+                      svgIcon="{{getSourceIcon(row.file ? row.file.contentType : null)}}"></mat-icon>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="file">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> File </th>
+          <td mat-cell  class="idt-case-list__title-cell" *matCellDef="let row">
+            <idt-link *ngIf="row.file" href="{{getSourceFile(row.id)}}" linkText="{{getSourceFileName(row)}}"></idt-link>
+            <span *ngIf="!row.file">{{row.title}}</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+          <td mat-cell class="idt-case-list__description-cell" *matCellDef="let row"> {{row.description}} </td>
+        </ng-container>
+        <ng-container matColumnDef="uploadAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Upload At </th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="row.file">{{row.file.uploadAt | date}}</span>
+            <span *ngIf="!row.file"> - </span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
+          <td mat-cell *matCellDef="let row">
+            <button *ngIf="editing" mat-stroked-button color="warn" (click)="deleteSource(row, true)"> Delete file </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="fileDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: fileDisplayedColumns;"></tr>
+      </table>
+    </div>
+    <div class="idt-case-detail__source-title">
+      <h4 class="margin-right-s">URLs</h4>
+      <button *ngIf="editing" mat-raised-button color="primary" (click)="openAddSourceModal(sourceType.Url)"> Add new URL </button>
+    </div>
+    <div class="mat-elevation-z8" [class.is-hidden]="sourcesEmpty$ | async">
+      <table class="idt-case-detail__sources-list " mat-table [dataSource]="urlSourceList$ | async" matSort>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+          <td mat-cell class="idt-case-list__title-cell" *matCellDef="let row"> {{row.title}} </td>
+        </ng-container>
+        <ng-container matColumnDef="url">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> URL </th>
+          <td mat-cell  class="idt-case-list__title-cell" *matCellDef="let row">
+            <idt-link href="{{getAbsoluteCaseLink(row.url)}}" linkText="{{row.url}}"></idt-link>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+          <td mat-cell class="idt-case-list__description-cell" *matCellDef="let row"> {{row.description}} </td>
+        </ng-container>
+        <ng-container matColumnDef="uploadAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Upload At </th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="row.file">{{row.file.uploadAt | date}}</span>
+            <span *ngIf="!row.file"> - </span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
+          <td mat-cell *matCellDef="let row">
+            <button *ngIf="editing" mat-stroked-button color="warn" (click)="deleteSource(row, false)"> Delete URL </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="urlDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: urlDisplayedColumns;"></tr>
+      </table>
+    </div>
+    <div *ngIf="(sourcesLoaded$ | async) && (sourcesEmpty$ | async)">This case has no sources</div>
+  </div>
+
+
+<div class="idt-case-detail__comments-wrapper">
+  <h3 class="margin-right-s"> Comments</h3>
+  <div *ngIf="isLoggedIn()">
+    <div class="idt-case-detail__comments-input-container">
+      <div class="idt-case-detail__comments-user">
+        <img class="idt-case-detail__comments-user-img" (error)="defaultImage()" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg">
+      </div>
+      <div class="idt-case-detail__comments-input">
+        <mat-form-field>
+          <mat-label>Leave a comment</mat-label>
+          <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10" #comment></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="idt-case-detail__comments-button">
+      <button mat-raised-button color="primary" (click)="onComment(comment.value)">Comment</button>
+    </div>
+  </div>
+
+  <div class="idt-case-detail__comments-login" *ngIf="!isLoggedIn()">
+    <button mat-stroked-button (click)="logIn()">Log in to comment</button>
+  </div>
+
+  <div class="idt-case-detail__comments-container">
+    <div class="idt-case-detail__comments" *ngFor="let comment of comments; let i = index">
+      <div class="idt-case-detail__comments-menu" *ngIf="comment.createdBy.id === userId">
+        <button class="idt-icon-button margin-right-xs" mat-stroked-button color="warn" (click)="onDeleteComment(comment.id, i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button class="idt-icon-button" mat-stroked-button color="primary" (click)="onEditComment(comment)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+      <div class="idt-case-detail__comments-user">
+        <img class="idt-case-detail__comments-user-img" (error)="defaultImage()" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg">
+      </div>
+      <div>
+        <div class="idt-case-detail__comment-header">
+          <div class="idt-case-detail__comment-creator">{{ comment.createdBy.firstName }} {{ comment.createdBy.lastName }}</div>
+          <div class="idt-case-detail__comment-date">{{ comment.createdAt | date:'medium' }}</div>
+        </div>
+        <div class="idt-case-detail__comment" *ngIf="!editingComment">{{ comment.comment }}</div>
+      </div>
+    </div>
+  </div>
+</div>

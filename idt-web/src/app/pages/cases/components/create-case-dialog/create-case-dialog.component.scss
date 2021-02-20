@@ -1,0 +1,96 @@
+@import 'src/styles/breakpoints.scss';
+
+.idt-create-case-dialog__container {
+  padding: 0 32px 16px 32px;
+
+
+  @media(max-width: map-get($breakpoints, small)) {
+    padding: 0;
+  }
+}
+
+.idt-add-case__info {
+  @media(max-width: map-get($breakpoints, small)) {
+    display: none;
+  }
+}
+
+.idt-form-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.idt-add-case__description-field,
+.idt-add-case__title-field {
+  width: 100%;
+}
+
+.idt-add-case__type-field,
+.idt-add-case__company-field,
+.idt-add-case__website-field,
+.idt-add-case__featured-control {
+  flex: 1;
+}
+
+.idt-add-case__type-field {
+  margin-right: 16px;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    margin-right: 0;
+  }
+}
+
+.idt-add-case__website-field {
+  margin-right: 24px;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    margin-right: 0;
+  }
+}
+
+.idt-add-case_row-container {
+  display: flex;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    flex-direction: column;
+  }
+}
+
+.idt-add-case__actions {
+  display: flex;
+  justify-content: center;
+}
+
+::ng-deep .cdk-textarea-autosize {
+  max-height: 120px;
+  min-height: 50px;
+}
+
+.idt-case__form-label.idt-featured-label {
+  display: flex;
+  align-items: center;
+}
+
+.idt-add-case__featured-control {
+  display: flex;
+  align-items: center;
+}
+
+.idt-add-case__title {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.idt-mobile {
+  display: none;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    display: block;
+  }
+}
+
+.idt-button-add-company-div {
+  margin: 0.5rem 1rem 0 1rem;
+}
+

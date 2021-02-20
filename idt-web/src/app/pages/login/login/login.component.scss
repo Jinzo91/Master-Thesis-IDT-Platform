@@ -1,0 +1,61 @@
+@import 'src/styles/breakpoints.scss';
+
+.idt-login__form {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.idt-login-page {
+    display: flex;
+}
+
+:host button + button {
+    margin-left: 20px;
+}
+
+.idt-login__buttons {
+    margin-top: 16px;
+}
+
+.idt-login__left-half,
+    .idt-login__right-half {
+    flex: 1 1 0;
+}
+
+.idt-login__right-half {
+    background-image: url(./../../../../assets/geom.jpg);
+    background-size: cover;
+    display: block;
+
+    @media(max-width: map-get($breakpoints, medium)) {
+        display: none;
+    }
+}
+
+.idt-login__left-half {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.idt-login__form-wrapper {
+    padding: 24px;
+}
+
+.idt-login-page {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    box-shadow: 0 2px 4px rgba(65, 65, 65, .5);
+    height: 424px;
+
+    @media(max-width: map-get($breakpoints, large)) {
+        margin-top: 0;
+        box-shadow: none;
+    }
+}
+
+.idt-login__headline {
+    margin: 0;
+}

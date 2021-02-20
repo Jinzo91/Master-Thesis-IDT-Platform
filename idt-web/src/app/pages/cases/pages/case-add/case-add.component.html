@@ -1,0 +1,107 @@
+  <div mat-card class="idt-add-case__card">
+    <h1 class="idt-add-case__title margin-top-m"> Fill in the form for creating a new case: </h1>
+
+    <mat-horizontal-stepper linear="true" #stepper>
+      <mat-step class="margin-top-2m" [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup" class="test">
+          <ng-template matStepLabel>Basic information</ng-template>
+          <div class="idt-step-content">
+            <mat-form-field class="margin-bottom-xs">
+              <input matInput placeholder="Title" formControlName="title">
+              <mat-error> {{ getErrorMessage('title') }} </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="margin-bottom-xs">
+              <textarea cdkTextareaAutosize matInput placeholder="Description" formControlName="description"></textarea>
+              <mat-error> {{ getErrorMessage('description') }} </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="margin-bottom-xs">
+              <input matInput placeholder="URL" formControlName="url">
+              <mat-error> {{ getErrorMessage('url') }} </mat-error>
+            </mat-form-field>
+            <div class="idt-add-case__row">
+                <mat-form-field class="idt-company-field">
+                    <mat-select formControlName="company" placeholder="Company">
+                      <mat-option>
+                        <ngx-mat-select-search 
+                          [formControl]="serverSideFilteringCtrl" 
+                          [searching]="isSearchingForCompanies" 
+                          placeholderLabel="Search"
+                          noEntriesFoundLabel="No entries found">
+                        </ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option *ngFor="let company of filteredServerSideCompanies$ | async" [value]="company.id"
+                        [innerHTML]="company.name | highlight: serverSideFilteringCtrl.value">
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+              <div class="idt-case__form-row">
+                <span class="idt-case__form-label idt-featured-label">Featured
+                  <i class="material-icons idt-info-icon"
+                    matTooltip="A featured case study will appear under hot cases on the dashboard page."
+                    matTooltipClass="idt-tooltip" aria-label="">info</i>
+                </span>
+                <mat-slide-toggle formControlName="featured"></mat-slide-toggle>
+              </div>
+            </div>
+          </div>
+
+          <div class="idt-add-details__actions">
+            <button (click)="createCase()" mat-raised-button color="primary" matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Case Details</ng-template>
+          <div class="idt-step-content">
+            You have successfully created a case. You can now choose its type and add the technologies used in it.
+            <div class="idt-add-case__type-select">
+              <mat-form-field>
+                <mat-select placeholder="Case Type" formControlName="caseType">
+                  <mat-option *ngFor="let type of caseTypes; let i = index" [(value)]="i">
+                    {{type}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <i class="material-icons idt-info-icon"
+                matTooltip="Some infos about the types. Maybe more extensive information will be needed here."
+                matTooltipClass="idt-tooltip" aria-label="">info</i>
+            </div>
+            <idt-tag-autocomplete
+              [allTags]="allTechnologies$"
+              (tagAdded)="addTag($event)"
+              (tagRemoved)="removeTag($event)"
+              >
+            </idt-tag-autocomplete>
+          </div>
+          <div class="idt-add-details__actions">
+            <button class="margin-right-m" mat-stroked-button matStepperPrevious>Back</button>
+            <button (click)="changeCaseType()" mat-raised-button color="primary" matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Information Sources</ng-template>
+        <div class="idt-step-content">
+
+          IMPORTANT: This step is provisional and not yet send to the backend. <br>
+          Please upload all sources of information that you have used for this case.
+
+          <mat-list>
+            <h3 *ngIf="files.length > 0" mat-subheader>Uploaded files:</h3>
+            <mat-list-item class="idt-add-case__file" *ngFor="let file of files; let i = index">
+              {{file}}
+              <mat-icon (click)="removeUploadedFile(i)" class="idt-add-case__file-delete">cancel</mat-icon>
+            </mat-list-item>
+          </mat-list>
+          <input id="file-input" class="hidden" (change)="onUploadChange($event)" multiple type="file" />
+          <label for="file-input" class="mat-raised-button margin-left-s" color="primary"> Choose Files</label>
+        </div>
+        <div class="idt-add-details__actions margin-top-3m">
+          <button class="margin-right-m" mat-stroked-button matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" (click)="submitFiles()">Submit</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>

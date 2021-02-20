@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idtdocumentdb
+  namespace: idt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: idtdocumentdb
+  template:
+    metadata:
+      labels:
+        app: idtdocumentdb
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: idtdocumentdb
+        image: idtcr.azurecr.io/idt-documentdb:latest
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: ddb
+          mountPath: /data/db
+      volumes:
+      - name: ddb
+        persistentVolumeClaim:
+          claimName: ddb-claim
+      imagePullSecrets:
+        - name: idtcr

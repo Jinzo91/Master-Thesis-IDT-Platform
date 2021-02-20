@@ -1,0 +1,47 @@
+@import 'src/styles/breakpoints.scss';
+
+.idt-footer {
+  background-color: peachpuff;
+}
+
+.idt-desktop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    @media(max-width: 768px) {
+       display: none;
+    }
+}
+
+.idt-mobile {
+    display: none;
+
+    @media(max-width: 768px) {
+       display: block;
+    }
+}
+
+.idt-content-wrapper {
+   // subtract header height to prevent scrolling
+   min-height: calc(100% - 175px - 64px);
+   overflow: auto;
+   padding: 0 32px;
+   padding-top: 64px;
+
+   @media(max-width: 768px) {
+      padding: 0 16px;
+      padding-top: 64px
+   }
+
+   .idt-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      height: 100%;
+      
+      @media(max-width: 768px) {
+        max-width: 100%;
+     }
+   }
+}

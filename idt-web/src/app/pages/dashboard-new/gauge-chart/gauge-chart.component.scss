@@ -1,0 +1,31 @@
+.chart-legend {
+  .legend-title {
+    color: #fff;
+  }
+
+  .legend-labels {
+    background: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .legend-item {
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .legend-label {
+    &:hover {
+      color: #fff !important;
+    }
+
+    .active {
+      .legend-label-text {
+        color: #fff !important;
+      }
+    }
+  }
+
+  .scale-legend-label {
+    color: #A0AABE;
+  }
+}

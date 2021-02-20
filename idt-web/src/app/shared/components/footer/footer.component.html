@@ -1,0 +1,49 @@
+<div class="idt-footer">
+  <div class="idt-footer__wrapper">
+    <div class="idt-footer__subscription">
+      <h3 class="margin-bottom-s">Subscribe to IDT weekly</h3>
+
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="example@mail.com" [(ngModel)]="emailValue" required>
+        </mat-form-field>
+        <button *ngIf="!isLoading" mat-raised-button (click)="subscribe()">
+          Subscribe
+        </button>
+        <button *ngIf="isLoading" mat-raised-button disabled style="color: white;">
+          Loading...
+        </button>
+      </div>
+
+    </div>
+    <div class="idt-footer__links idt-desktop">
+      <a (click)="goTo('/')">Home</a>
+      <a (click)="goTo('/feed')">Feed</a>
+      <a (click)="goTo('/dashboard')">Dashboard</a>
+      <a (click)="goTo('/companies')">Companies</a>
+      <a (click)="goTo('/cases')">Case Studies</a>
+      <a (click)="goTo('/about')">About</a>
+      <a *ngIf="!(userLoggedIn$ | async)" (click)="login()">Login</a>
+      <a *ngIf="userLoggedIn$ | async" (click)="logout()">Logout</a>
+    </div>
+    <div class="idt-footer__subscription idt-desktop">
+      <div class="about">
+        <h3>What is IDT?</h3>
+        <p>The Initiative for Digital Transformation (IDT) serves as a research platform on the fundamental issues and dynamics underlying the ability of enterprises to leverage their potential for digital technology-driven organizational change.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="idt-bottom-footer">
+  <div class="idt-bottom-header__wrapper">
+    <div class="idt-bottom-header__copyright">
+      <p>&copy; 2015 - 2020 | Initiative for Digital Transformation</p>
+    </div>
+    <div class="idt-bottom-header__imprint">
+      <p>
+        <span class="clickable" (click)="goTo('/imprint')">Imprint</span> | <span class="clickable"
+          (click)="goTo('/privacy')">Privacy</span>
+      </p>
+    </div>
+  </div>
+</div>

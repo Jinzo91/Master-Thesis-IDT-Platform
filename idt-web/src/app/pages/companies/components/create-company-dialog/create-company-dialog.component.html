@@ -1,0 +1,43 @@
+<div class="idt-create-company-dialog__container margin-top-s">
+  <h3>Fill out the form to create a new company</h3>
+  <form [formGroup]="companyFormGroup">
+    <div class="idt-form-content">
+      <div class="idt-add-company__actions">
+        <mat-form-field class="idt-search-company__name-field">
+          <input matInput placeholder="Company's Name" formControlName="name">
+        </mat-form-field>
+        <button mat-stroked-button class="margin-left-m margin-top-2xs margin-bottom-2xs" (click)="searchByName()" color="primary">Search By Name</button>
+      </div>
+      <h6><span>OR</span></h6>
+      <div class="idt-add-company__actions">
+        <mat-form-field class="idt-search-company__website-field">
+          <input matInput placeholder="Website (format 'www.example.com')" formControlName="url">
+        </mat-form-field>
+        <button mat-stroked-button class="margin-left-m margin-top-2xs margin-bottom-2xs" (click)="searchByUrl()" color="primary">Search By URL </button>
+      </div>
+      <h6><span>Results</span></h6>
+     <div class="searchResults" *ngIf="this.searchResult.length > 0">
+        <table>
+          <tr>
+            <th class="mat-header-cell">Name</th>
+            <th class="mat-header-cell">Industry</th>
+            <th class="mat-header-cell">Country</th>
+            <th class="mat-header-cell">Headcount</th>
+          </tr>
+          <tr class="mat-row" [ngClass]="(item == this.selectedCompany) ? 'selectedCompany' : ''" *ngFor="let item of this.searchResult" (click)="selectCompany(item)">
+            <td class="mat-cell">{{ item.Name }}</td>
+            <td class="mat-cell">{{ item.Industry }}</td>
+            <td class="mat-cell">{{ item.Country }}</td>
+            <td class="mat-cell">{{ item.Employees }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="idt-add-company__actions margin-top-m">
+      <button mat-stroked-button (click)="closeDialog()" color="primary">Cancel</button>
+      <button class="margin-left-3m" mat-stroked-button (click)="createManually()" color="primary">Create Manually</button>
+      <button class="margin-left-3m" mat-raised-button (click)="createCompany()"
+        color="primary">Create Company</button>
+    </div>
+  </form>
+</div>

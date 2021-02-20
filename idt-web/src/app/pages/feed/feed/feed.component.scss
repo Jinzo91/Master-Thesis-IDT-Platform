@@ -1,0 +1,122 @@
+@import 'src/styles/breakpoints.scss';
+@import "src/styles/idt-theme.scss";
+
+
+.idt-feed-empty{
+  width: fit-content;
+  margin: auto;
+}
+
+.idt-semibold {
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.idt-dashboard__navigation-item {
+  padding: 24px;
+  background: rgba(white, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 170px;
+  white-space: pre;
+  height: 100px;
+  border: 4px solid mat-color($idt-primary, 500);
+  margin: auto;
+  text-align: center;
+
+  ::ng-deep .idt-link {
+    color: mat-color($idt-primary, 500);
+    font-size: 20px;
+  }
+
+  .navigation-icon {
+    margin-bottom: 12px;
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    color: mat-color($idt-primary, 500);
+  }
+
+  @media(max-width: map-get($breakpoints, small)) {
+    padding: 0 12px;
+    margin-top: 12px;
+    max-width: 100%;
+    width: 300px;
+    background: mat-color($idt-primary, 500);
+    flex-direction: row;
+    height: 70px;
+
+    ::ng-deep .idt-link,
+    .navigation-icon {
+      color: white;
+      margin-bottom: 0;
+    }
+
+    .navigation-icon {
+      padding-right: 30px;
+    }
+  }
+
+}
+
+.idt-dashboard__navigation-item:hover {
+    background: mat-color($idt-primary, 500);
+    color: white;
+    cursor: pointer;
+
+    .navigation-icon {
+      color: white;
+    }
+
+    ::ng-deep .idt-link {
+      color: white;
+    }
+}
+
+.idt-dashboard__navigation-item + .idt-dashboard__navigation-item {
+  margin-left: 40px;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    margin-left: 0;
+  }
+}
+
+
+.idt-refresh-icon-container {
+  position: relative;
+  height: 10px;
+
+  .idt-refresh-icon {
+    position: absolute;
+    right: 10px;
+
+    @media(max-width: map-get($breakpoints, small)) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  .idt-refresh-icon:hover{
+    cursor: pointer;
+  }
+}
+
+
+.idt-recommended-companies {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}

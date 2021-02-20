@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idtdaemon
+  namespace: idt-test
+spec:
+  selector:
+    matchLabels:
+      app: idtdaemon
+  template:
+    metadata:
+      labels:
+        app: idtdaemon
+    spec:
+      containers:
+      - name: idtdaemon
+        image: idtcr.azurecr.io/idt-deamon:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: test
+      imagePullSecrets:
+      - name: idtcr

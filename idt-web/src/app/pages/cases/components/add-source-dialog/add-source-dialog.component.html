@@ -1,0 +1,29 @@
+<div class="idt-create-source-dialog__container margin-top-s">
+      <h3 class="idt-add-case__title">Fill out the form to add a new case source</h3>
+      <form class="margin-top-m" [formGroup]="sourceFormGroup">
+        <mat-form-field *ngIf="!isFileSource()" class="idt-add-source__title-field">
+          <input matInput placeholder="URL title" formControlName="title" required>
+        </mat-form-field>
+        <mat-form-field class="idt-add-source__description-field">
+          <textarea cdkTextareaAutosize matInput placeholder="Description" formControlName="description" required ></textarea>
+        </mat-form-field>
+        <mat-form-field *ngIf="!isFileSource()" class="idt-add-source__url">
+          <input matInput placeholder="Source URL" formControlName="url" required>
+        </mat-form-field>
+        <div idtDragDrop *ngIf="isFileSource()" class="idt-add-source__drag-drop margin-top-2xs margin-bottom-s"
+             (click)="fileInput.click()" (OnFileDropped)="onFileDropped($event)">
+          <input #fileInput id="file-input" class="hidden" (change)="onFileDropped($event.target.files)" type="file"/>
+          <span>Drag & drop PDF-File or </span>
+          <button mat-raised-button class="margin-left-xs" color="primary">Add a PDF-File</button>
+        </div>
+        <div *ngIf="this.sourceFormGroup.controls.file.value">
+          File Added: {{this.sourceFormGroup.controls.file.value.name}}
+        </div>
+      </form>
+      <div class="idt-add-source__actions margin-top-m">
+        <button mat-stroked-button class="margin-right-m" [mat-dialog-close] color="primary">Cancel</button>
+        <button mat-raised-button  [mat-dialog-close]="sourceFormGroup.getRawValue()"
+                color="primary" [disabled]="sourceFormGroup.invalid">Add Source</button>
+      </div>
+    </div>
+    

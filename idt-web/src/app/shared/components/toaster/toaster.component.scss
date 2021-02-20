@@ -1,0 +1,40 @@
+@import 'src/styles/idt-theme.scss';
+
+:host {
+  display: flex;
+  align-items: center;
+  min-height: 20px;
+  min-width: 300px;
+  border-radius: 8px;
+  padding: 16px;
+  background: white;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+
+:host.idt-toaster--error {
+  border: 2px solid mat-color($mat-red, 500);
+
+  .material-icons {
+    color: mat-color($mat-red, 500);
+  }
+}
+
+:host.idt-toaster--success {
+  border: 2px solid #28a745;
+
+  .material-icons {
+    color: #28a745;
+  }
+}
+
+:host.idt-toaster--info {
+  border: 2px solid mat-color($idt-primary, 700);
+
+  .material-icons {
+    color: mat-color($idt-primary, 700);
+  }
+}
+
+.idt-toaster__icon {
+  margin-right: 8px;
+}

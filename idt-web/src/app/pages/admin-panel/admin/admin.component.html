@@ -1,0 +1,13 @@
+<div class="admin-page">
+  <h3>Admin Dashboard</h3>
+  <br>
+  <div>
+    <h4>Send Invitation</h4>
+      <mat-form-field>
+        <input matInput placeholder="Email for Invitation" [(ngModel)]="emailValue" required>
+      </mat-form-field>
+      <button mat-raised-button (click)="invite()">Invite</button>
+  </div>
+    <br>
+    <br>
+</div>

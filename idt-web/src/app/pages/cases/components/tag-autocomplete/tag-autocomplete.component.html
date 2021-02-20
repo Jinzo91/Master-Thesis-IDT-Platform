@@ -1,0 +1,25 @@
+<mat-form-field class="idt-tag-autocomplete">
+  <mat-chip-list #chipList aria-label="Tech selection">
+    <mat-chip *ngFor="let tech of tags" [selectable]="selectable" [removable]="removable"
+      (removed)="remove(tech)">
+      {{tech}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+        <input matInput placeholder="Add a new technology..."
+          [formControl]="inputControl"
+          #techInput
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="true"
+          (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let tag of filteredTags$ | async" [value]="tag.id" [innerHTML]="tag.name | highlight : this.inputControl.value">
+    </mat-option>
+  </mat-autocomplete>
+  <i class="material-icons idt-info-icon"
+    matSuffix
+    matTooltip="You can choose from the existing tags or create new ones yourself. If a tag already exists please use the existing one and don't create a new one."
+    matTooltipClass="idt-tooltip" aria-label="">info</i>
+</mat-form-field>

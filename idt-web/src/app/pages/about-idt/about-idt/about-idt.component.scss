@@ -1,0 +1,88 @@
+@import 'src/styles/breakpoints.scss';
+
+:host {
+    display: block;
+}
+
+.sap-logo {
+  width: 160px;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    width: 80px;
+  }
+}
+
+.tum-logo {
+  width: 300px;
+  margin-left: -8px;
+  margin-bottom: 32px;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    width: 160px;
+    margin-bottom: 0;
+  }
+}
+
+.idt-about__logo-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: column;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.idt-about-page {
+  width: 100%;
+  text-align: justify;
+  display: flex;
+  margin-top: 56px;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    flex-direction: column;
+    margin-top: 24px;
+  }
+}
+
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #f7f7f7;
+  z-index: -1;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    background-color: white;
+  }
+}
+
+.idt-about__half {
+  padding: 0 32px;
+  flex: 1 1 0;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    padding: 0;
+  }
+}
+
+.right {
+    padding: 0 24px;
+}
+
+.idt-mobile {
+  display: none;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    display: flex;
+  }
+}
+
+.medium-text {
+  font-weight: 500;
+}

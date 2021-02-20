@@ -1,0 +1,11 @@
+<div class="idt-suggested-company" (click)="onCompanyClick($event)">
+  <div class="idt-suggested-company-logo">
+    <img [src]="logo" (error)="defaultImage($event)" alt="company_logo">
+  </div>
+  <div class="idt-suggested-company-name">{{ company.name }}</div>
+  <div class="idt-suggested-company-industry">
+    {{ industries[company.industry].name }}
+  </div>
+  <div *ngIf="!following" class="idt-company-follow" (click)="onFollowCompany($event)"> Follow </div>
+  <div *ngIf="following" class="idt-company-unfollow" (click)="onUnfollowCompany($event)"> Unfollow </div>
+</div>

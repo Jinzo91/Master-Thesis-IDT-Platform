@@ -1,0 +1,63 @@
+@import 'src/styles/breakpoints.scss';
+
+::ng-deep .idt-paginator__container .mat-paginator-navigation-previous,
+::ng-deep .idt-paginator__container .mat-paginator-navigation-next {
+  display: none;
+}
+
+.idt-paginator__container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 12px;
+  padding-left: 0;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    flex-direction: column-reverse;
+    padding-top: 16px;
+  }
+}
+
+.idt-paginator__container .mat-paginator {
+  flex-grow: 1;
+}
+
+::ng-deep .idt-paginator__container .mat-paginator-container {
+  justify-content: space-between;
+}
+
+.idt-paginator-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  min-width: unset;
+  border-radius: 100%;
+}
+
+::ng-deep .idt-paginator-button-focused {
+  cursor: auto;
+}
+
+::ng-deep .idt-paginator-button-focused span {
+  font-weight: 700;
+}
+
+.idt-paginator__page-buttons {
+  border-radius: 40px;
+  display: flex;
+  height: 30px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+::ng-deep .idt-paginator-icon-button span {
+  padding-bottom: 4px;
+}
+
+.idt-paginator-icon-button {
+  color: rgba(0, 0, 0, 0.54);
+}

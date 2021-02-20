@@ -1,0 +1,32 @@
+<div class="idt-companies__headline-wrapper">
+  <a *ngIf="userRole !== 'visitor'" class="idt-add-company-button idt-mobile" mat-raised-button color="accent" (click)="openCreateCompanyDialog()"> Add new company </a>
+  <h3 class="idt-companies__headline"> Companies </h3>
+  </div>
+<div class="idt-company-overview__section">
+    <p></p>
+</div>
+
+<div class="idt-companies__wrapper">
+  <form [formGroup]="filterForm">
+    <div class="idt-search-formfield__wrapper">
+      <div class="idt-search-formfield">
+        <mat-form-field appearance="outline">
+          <mat-label>Search in companies</mat-label>
+          <input matInput formControlName="search" placeholder="Search for a specific company">
+          <mat-icon class="search-icon" matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+      <a *ngIf="userRole !== 'visitor'" class="idt-add-company-button idt-desktop" mat-raised-button color="accent" (click)="openCreateCompanyDialog()"> Add new company </a>
+    </div>
+  </form>
+
+  <idt-company-list
+    [data]="companies$"
+    [searchString]="searchString$"
+    [currentPage]="currentPage$"
+    (pageChanged)="currentPage$.next($event)"
+    (pageSizeChanged)="currentPageSize$.next($event)"
+    (sortChanged)="currentSort$.next($event)">
+  </idt-company-list>
+</div>
+

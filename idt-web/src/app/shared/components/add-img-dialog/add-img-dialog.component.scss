@@ -1,0 +1,11 @@
+.idt-add-img-dialog__img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.idt-add-img-dialog__preview-img {
+  height: 200px;
+  max-width: 80%;
+  object-fit: contain;
+}

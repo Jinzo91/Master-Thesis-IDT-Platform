@@ -1,0 +1,132 @@
+<div class="dashboard" #dashboardContainer>
+  <div class="chart-container medium" id="chart-container-1" draggable="true" (dragstart)="onDragStart($event)" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+    <div class="chart-title">
+      Number of new cases/companies on IDT per month
+    </div>
+    <div class="options">
+      <mat-icon
+        matSuffix class="idt-info-icon"
+        matTooltipPosition="below"
+        matTooltip="Number of cases and companies on IDT per month."
+        matTooltipClass="idt-tooltip" aria-label="">info</mat-icon>
+    </div>
+    <idt-line-chart [data]="progressCasesAndCompanies"></idt-line-chart>
+  </div>
+  <div class="chart-container medium" id="chart-container-2" draggable="true" (dragstart)="onDragStart($event)" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+    <div class="chart-title">
+      Top companies
+    </div>
+    <div class="options">
+      <mat-icon
+        matSuffix class="idt-info-icon"
+        matTooltipPosition="below"
+        matTooltip="Top companies by number of cases."
+        matTooltipClass="idt-tooltip" aria-label="">info</mat-icon>
+    </div>
+    <idt-vertical-bar-chart [data]="topCompanies" xAxisLabel='Company'></idt-vertical-bar-chart>
+  </div>
+  <div class="chart-container medium" id="chart-container-6" draggable="true" (dragstart)="onDragStart($event)" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+    <div class="chart-title">
+      Case type distribution
+    </div>
+    <div class="options">
+      <mat-icon
+        matSuffix class="idt-info-icon"
+        matTooltipPosition="below"
+        matTooltip="The distribution of cases types on cases."
+        matTooltipClass="idt-tooltip" aria-label="">info</mat-icon>
+    </div>
+    <idt-pie-chart [data]="caseTypeDistribution"></idt-pie-chart>
+  </div>
+  <div class="chart-container small" style="border-bottom: 10px solid #16c11e" draggable="true" (dragstart)="onDragStart($event)" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+    <div class="chart-title">
+      Cases on IDT
+    </div>
+    <div class="options">
+      <mat-icon
+        matSuffix class="idt-info-icon"
+        matTooltipPosition="below"
+        matTooltip="Number of cases on IDT."
+        matTooltipClass="idt-tooltip" aria-label="">info</mat-icon>
+    </div>
+    <div class="keyvalue">
+      <div class="keyvalue-number">{{(counts$ | async).cases}}</div>
+      <div class="keyvalue-text">Cases</div>
+      <div class="keyvalue-change-text"><span class="keyvalue-increase">&#9650; {{ todaysCaseCount }}</span> vs yesterday</div>
+    </div>
+    <idt-line-chart class="minimalistic-chart" [data]="progressCases" [showLabels]="false" [xAxis]="false" [yAxis]="false" [showXAxisLabel]="false" [showYAxisLabel]="false" [tooltipDisabled]="true"></idt-line-chart>
+  </div>
+  <div class="chart-container small" style="border-bottom: 10px solid #16c11e" draggable="true" (dragstart)="onDragStart($event)" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+    <div class="chart-title">
+      Companies on IDT
+    </div>
+    <div class="options">
+      <mat-icon
+        matSuffix class="idt-info-icon"
+        matTooltipPosition="below"
+        matTooltip="Number of companies on IDT."
+        matTooltipClass="idt-tooltip" aria-label="">info</mat-icon>
+    </div>
+    <div class="keyvalue">
+      <div class="keyvalue-number">{{(counts$ | async).companies}}</div>
+      <div class="keyvalue-text">Companies</div>
+      <div class="keyvalue-change-text"><span class="keyvalue-increase">&#9650; {{ todaysCompanyCount }}</span> vs yesterday</div>
+    </div>
+    <idt-line-chart class="minimalistic-chart" [data]="progressCompanies" [showLabels]="false" [xAxis]="false" [yAxis]="false" [showXAxisLabel]="false" [showYAxisLabel]="false" [tooltipDisabled]="true"></idt-line-chart>
+  </div>
+  <div class="chart-container medium" id="chart-container-3" draggable="true" (dragstart)="onDragStart($event)" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+    <div class="chart-title">
+      Top technologies
+    </div>
+    <div class="options">
+      <mat-icon
+        matSuffix class="idt-info-icon"
+        matTooltipPosition="below"
+        matTooltip="Top technologies on IDT by number of cases."
+        matTooltipClass="idt-tooltip" aria-label="">info</mat-icon>
+    </div>
+    <idt-horizontal-bar-chart [data]="topTechnologies"></idt-horizontal-bar-chart>
+  </div>
+  <div class="chart-container small" id="chart-container-4" draggable="true" (dragstart)="onDragStart($event)" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+    <div class="chart-title">
+      Trending technologies
+    </div>
+    <div class="options">
+      <mat-icon
+        matSuffix class="idt-info-icon"
+        matTooltipPosition="below"
+        matTooltip="Technology with most cases on IDT of the last two weeks."
+        matTooltipClass="idt-tooltip" aria-label="">info</mat-icon>
+    </div>
+    <idt-vertical-bar-chart class="small-vertical-bar-chart" *ngIf="trendingTechnologies.length > 0" [data]="trendingTechnologies" xAxisLabel='Technology'></idt-vertical-bar-chart>
+    <div class="error" *ngIf="trendingTechnologies.length == 0">No data available.</div>
+  </div>
+  <div class="chart-container small">
+    <div class="chart-title">
+      Newest companies
+    </div>
+    <div class="options">
+      <mat-icon
+        matSuffix class="idt-info-icon"
+        matTooltipPosition="below"
+        matTooltip="The newest companies on the IDT platform."
+        matTooltipClass="idt-tooltip" aria-label="">info</mat-icon>
+    </div>
+    <table mat-table [dataSource]="newestCompanies">
+
+      <ng-container matColumnDef="logo">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let row"> <img width="50px" (error)="defaultImage($event)" [src]="companyService.getLogo(row.id)" /> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Company Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)">
+      </tr>
+    </table>
+  </div>
+</div>

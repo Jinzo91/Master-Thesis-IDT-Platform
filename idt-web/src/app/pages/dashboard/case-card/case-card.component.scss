@@ -1,0 +1,88 @@
+@import "src/styles/idt-theme.scss";
+
+:host {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    cursor: pointer;
+    margin-bottom: 36px;
+}
+
+.idt-case-card__image-wrapper {
+    height: 170px;
+    width: 100%;
+    flex: 1;
+    background-position: left;
+    background-size: cover;
+}
+
+.idt-case-card__image {
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+.idt-case-card__content {
+    flex: 3;
+    height: 170px;
+    overflow: hidden;
+}
+
+.idt-case-card__date {
+    font-size: 12px;
+    color: grey;
+    margin-right: 16px;
+    margin-top: 8px;
+}
+
+.idt-case-card__headline {
+    margin: 0;
+    margin-bottom: 0;
+}
+
+.idt-case-card__description {
+    margin: 8px 0;
+    font-size: 14px;
+    padding-right: 12px;
+    padding-left: 16px;
+    text-align: justify;
+}
+
+.idt-case-card__title-tag-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding-left: 16px;
+    box-sizing: border-box;
+    padding-bottom: 8px;
+    padding-top: 10px;
+}
+
+.idt-case-card__tag {
+    font-size: 14px;
+    padding: 2px 8px;
+    border-radius: 16px;
+    background: mat-color($idt-primary, 500);
+    color: white;
+    align-self: flex-start;
+    margin-right: 8px;
+    margin-top: 8px;
+}
+
+.idt-case-card__tag:hover {
+    background: mat-color($idt-primary, 400);
+}
+
+.idt-case-card__tag.idt-case-card__tag--company {
+    background-color: mat-color($idt-accent, 600);
+}
+
+.idt-carousel__date-tag-wrapper {
+    // margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}

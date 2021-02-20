@@ -1,0 +1,52 @@
+@import "src/styles/idt-theme.scss";
+
+:host {
+    display: block;
+    height: 100%;
+}
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+}
+
+.mat-row:hover {
+  background-color: mat-color($idt-accent, 100);
+  cursor: pointer;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.idt-company-follow {
+  border: 2px solid #213775;
+  border-radius: 20px;
+  text-align: center;
+  background-color: white;
+  color: #213775;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.idt-company-follow:hover{
+  color: white;
+  background-color: #213775;
+  cursor: pointer
+}
+
+.idt-company-unfollow{
+  border: 2px solid #213775;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #213775;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.idt-company-unfollow:hover {
+  cursor: pointer;
+}

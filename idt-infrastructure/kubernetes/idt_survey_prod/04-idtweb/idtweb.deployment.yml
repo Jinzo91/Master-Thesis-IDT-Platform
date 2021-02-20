@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idtweb
+  namespace: idt
+spec:
+  selector:
+    matchLabels:
+      app: idtweb
+  template:
+    metadata:
+      labels:
+        app: idtweb
+        type: deployable
+    spec:
+      containers:
+      - name: idtweb
+        image: survey-front:local
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: idtcr

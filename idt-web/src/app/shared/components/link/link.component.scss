@@ -1,0 +1,26 @@
+@import "src/styles/idt-theme.scss";
+
+a {
+  text-decoration: none;
+}
+
+.idt-link {
+  color: mat-color($idt-accent, 900);
+  display: inline-flex;
+  align-items: center;
+  white-space: pre-wrap;
+  font-weight: 500;
+}
+
+a:hover,
+a:visited:hover {
+  color: #85b1ff;
+}
+
+a:visited {
+  color: #4173cc;
+}
+
+a:active {
+  color: #3964b2;
+}

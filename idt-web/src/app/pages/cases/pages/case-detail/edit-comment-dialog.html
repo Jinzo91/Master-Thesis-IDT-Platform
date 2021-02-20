@@ -1,0 +1,11 @@
+<div class="idt-delete-dialog__container margin-top-s" style="display: flex; flex-direction: column; align-items: center">
+  <div>
+    <mat-form-field class="idt-case-detail__comments-input">
+      <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10" [(ngModel)]="data"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="idt-delete-dialog__actions margin-top-2m">
+    <button mat-stroked-button color="warn" class="margin-right-xs" [mat-dialog-close]="false">Cancel</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="data">Save</button>
+  </div>
+</div>

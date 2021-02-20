@@ -1,0 +1,70 @@
+@import "src/styles/idt-theme.scss";
+@import 'src/styles/breakpoints.scss';
+
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+}
+
+.mat-row:hover {
+  background-color: mat-color($idt-accent, 100);
+  cursor: pointer;
+}
+
+.mat-elevation-z8 {
+  padding: 8px 30px 20px 30px;
+  text-align: left;
+  position: relative;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    overflow: scroll;
+  }
+
+  @media(max-width: map-get($breakpoints, small)) {
+    padding: 0
+  }
+}
+
+.mat-cell,
+.mat-header-cell {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.idt-case-list__title-cell.mat-cell {
+  max-width: 300px;
+}
+
+.idt-case-list__company-cell.mat-cell {
+  max-width: 200px;
+}
+
+.idt-case-list__date-cell.mat-cell {
+  min-width: 80px;
+}
+
+.idt-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

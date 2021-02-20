@@ -1,0 +1,31 @@
+<div class="idt-registration-page">
+  <h3 class="idt-registration__title margin-top-xl">Congrats! You just got invited by somebody to join the IDT community! <br>
+  Please enter your credentials to finish your registration. </h3>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="idt-registration__form">
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="firstName" required>
+      <mat-error> {{firstNameErrorMessage}} </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Family name" formControlName="lastName" required>
+      <mat-error> {{lastNameErrorMessage}} </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password" formControlName="password" required>
+      <mat-error> {{passwordErrorMessage}} </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="password" placeholder="Repeat password" formControlName="passwordRepeat" required>
+      <mat-error> {{passwordRepeatErrorMessage}} </mat-error>
+    </mat-form-field>
+
+    <div class="idt-registration__password-error" *ngIf="passwordMismatchErrorMessage.length > 0"> <i class="material-icons md-24">error</i> {{passwordMismatchErrorMessage}} </div>
+
+   <div class="idt-registration__button">
+      <button mat-raised-button color="primary" [disabled]="registrationForm.invalid" type="submit"> Register </button>
+   </div>
+  </form>
+</div>

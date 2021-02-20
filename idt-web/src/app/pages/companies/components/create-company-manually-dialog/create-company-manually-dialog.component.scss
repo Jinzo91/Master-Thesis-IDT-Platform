@@ -1,0 +1,34 @@
+.idt-create-company-dialog__container {
+    padding: 0 24px;
+  }
+  
+  .idt-form-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .idt-add-company__description-field,
+  .idt-add-company__name-field {
+    width: 100%;
+  }
+  
+  .idt-add-company__industry-field,
+  .idt-add-company__headoffice-field,
+  .idt-add-company__headcount-field,
+  .idt-add-company__website-field {
+    flex: 1;
+  }
+  
+  .idt-add-company__row-container {
+    display: flex;
+  }
+  
+  .idt-add-company__actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  ::ng-deep .cdk-textarea-autosize {
+    max-height: 120px;
+  }

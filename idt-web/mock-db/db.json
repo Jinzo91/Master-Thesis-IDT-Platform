@@ -1,0 +1,205 @@
+{
+  "login": {
+    "expires_in": 3600,
+    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwibWFpbCI6InBhdWwud2ViZXJAdHVtLmRlIiwiZmlyc3RuYW1lIjoiUGF1bCIsImxhc3RuYW1lIjoiV2ViZXIiLCJyb2xlIjoxfQ.XGkolRxivgF08hfy93mqgRicUuMkdxvpp5RoKcNoBq0",
+    "user_id": 1,
+    "status": 200
+  },
+  "invite": [
+    {
+      "id": "abc",
+      "mail": "yasna@test.com",
+      "dateCreated": "2019-07-22T13:54:14.466Z"
+    }
+  ],
+  "cases": {
+    "values": [
+      {
+        "id": "1",
+        "title": "Case 1",
+        "description": "This is the sarcastic case 1.",
+        "company": 1,
+        "createdAt": "2019-07-19T07:22Z",
+        "modifiedAt": "2019-07-19T07:22Z",
+        "createdBy": {
+          "id": "4",
+          "mail": "firstName.lastName@tum.de",
+          "firstName": "Cayenne Tina",
+          "lastName": "Mustermann",
+          "role": "User"
+        }
+      },
+      {
+        "id": "3",
+        "title": "Case 3",
+        "description": "This is the sad case 3.",
+        "company": 2,
+        "createdAt": "2019-07-23T07:22Z",
+        "modifiedAt": "2019-07-19T07:22Z",
+        "createdBy": {
+          "id": "4",
+          "mail": "firstName.lastName@tum.de",
+          "firstName": "Cayenne Tina",
+          "lastName": "Mustermann",
+          "role": "User"
+        }
+      },
+      {
+        "id": "2",
+        "title": "Case 2",
+        "description": "This is the funny case 2.",
+        "company": 1,
+        "createdAt": "2019-07-20T07:22Z",
+        "modifiedAt": "2019-07-19T07:22Z",
+        "createdBy": {
+          "id": "4",
+          "mail": "firstName.lastName@tum.de",
+          "firstName": "Cayenne Tina",
+          "lastName": "Mustermann",
+          "role": "User"
+        }
+      }
+    ],
+    "counts": 3
+  },
+  "companies": {
+    "values": [
+      {
+        "id": "1",
+        "companyName": "TU München",
+        "disabled": false,
+        "createdBy": {
+          "id": "4",
+          "mail": "firstName.lastName@tum.de",
+          "firstName": "Cayenne Tina",
+          "lastName": "Mustermann",
+          "role": "User"
+        },
+        "createdAt": "2019-07-22T13:54:14.466Z",
+        "modifiedBy": {
+          "id": "4",
+          "mail": "firstName.lastName@tum.de",
+          "firstName": "Cayenne Tina",
+          "lastName": "Mustermann",
+          "role": "User"
+        },
+        "modifiedAt": "2019-07-22T13:54:14.466Z"
+      },
+      {
+        "id": "2",
+        "companyName": "IDT-TUM",
+        "disabled": false,
+        "createdBy": {
+          "id": "4",
+          "mail": "firstName.lastName@tum.de",
+          "firstName": "Cayenne Tina",
+          "lastName": "Mustermann",
+          "role": "User"
+        },
+        "createdAt": "2019-07-27T13:54:14.466Z",
+        "modifiedBy": {
+          "id": "4",
+          "mail": "firstName.lastName@tum.de",
+          "firstName": "Cayenne Tina",
+          "lastName": "Mustermann",
+          "role": "User"
+        },
+        "modifiedAt": "2019-07-27T13:54:14.466Z"
+      }
+    ],
+    "count": "2"
+  },
+  "company": [
+    {
+      "id": "1",
+      "companyName": "TU München",
+      "disabled": false,
+      "createdBy": {
+        "id": "4",
+        "mail": "firstName.lastName@tum.de",
+        "firstName": "Cayenne Tina",
+        "lastName": "Mustermann",
+        "role": "User"
+      },
+      "createdAt": "2019-07-22T13:54:14.466Z",
+      "modifiedBy": {
+        "id": "4",
+        "mail": "firstName.lastName@tum.de",
+        "firstName": "Cayenne Tina",
+        "lastName": "Mustermann",
+        "role": "User"
+      },
+      "modifiedAt": "2019-07-22T13:54:14.466Z"
+    },
+    {
+      "id": "2",
+      "companyName": "IDT-TUM",
+      "disabled": false,
+      "createdBy": {
+        "id": "4",
+        "mail": "firstName.lastName@tum.de",
+        "firstName": "Cayenne Tina",
+        "lastName": "Mustermann",
+        "role": "User"
+      },
+      "createdAt": "2019-07-27T13:54:14.466Z",
+      "modifiedBy": {
+        "id": "4",
+        "mail": "firstName.lastName@tum.de",
+        "firstName": "Cayenne Tina",
+        "lastName": "Mustermann",
+        "role": "User"
+      },
+      "modifiedAt": "2019-07-27T13:54:14.466Z"
+    }
+  ],
+  "counts": {
+    "cases": "32",
+    "companies": "25"
+  },
+  "cases.1": {
+    "id": "1",
+    "title": "Case 1",
+    "description": "This is the sarcastic case 1.",
+    "company": "1",
+    "createdAt": "2019-07-19T07:22Z",
+    "modifiedAt": "2019-07-19T07:22Z",
+    "createdBy": {
+      "id": "4",
+      "mail": "firstName.lastName@tum.de",
+      "firstName": "Cayenne Tina",
+      "lastName": "Mustermann",
+      "role": "User"
+    }
+  },
+  "cases.3": {
+    "id": "3",
+    "title": "Case 3",
+    "description": "This is the sad case 3.",
+    "company": "2",
+    "createdAt": "2019-07-23T07:22Z",
+    "modifiedAt": "2019-07-19T07:22Z",
+    "createdBy": {
+      "id": "4",
+      "mail": "firstName.lastName@tum.de",
+      "firstName": "Cayenne Tina",
+      "lastName": "Mustermann",
+      "role": "User"
+    }
+  },
+  "cases.2": {
+    "id": "2",
+    "title": "Case 2",
+    "description": "This is the funny case 2.",
+    "company": "1",
+    "createdAt": "2019-07-20T07:22Z",
+    "modifiedAt": "2019-07-19T07:22Z",
+    "createdBy": {
+      "id": "4",
+      "mail": "firstName.lastName@tum.de",
+      "firstName": "Cayenne Tina",
+      "lastName": "Mustermann",
+      "role": "User"
+    }
+  }
+}

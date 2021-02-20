@@ -1,0 +1,10 @@
+<mat-form-field>
+    <mat-select #multiSelect [placeholder]="label" [multiple]="true" [formControl]="selectedValueControl">
+        <ngx-mat-select-search
+            noEntriesFoundLabel="No entries found"
+            placeholderLabel="Search" 
+            [formControl]="filterControl">
+        </ngx-mat-select-search>
+        <mat-option *ngFor="let item of filteredItems$ | async" [value]="item.id" [innerHTML]="item.name | highlight : searchString"></mat-option>
+    </mat-select>
+</mat-form-field>

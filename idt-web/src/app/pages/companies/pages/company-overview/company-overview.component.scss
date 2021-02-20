@@ -1,0 +1,115 @@
+@import "src/styles/idt-theme.scss";
+@import 'src/styles/breakpoints.scss';
+
+:host {
+    display: block;
+    height: 100%;
+}
+
+.idt-company-overview__section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.idt-add-company-button {
+  margin-top: 3px;
+  align-self: flex-start;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    position: absolute;
+    top: 76px;
+    right: 24px;
+  }
+}
+
+.idt-companies__headline {
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-weight: 300 !important;
+  font-size: 30px;
+  margin-bottom: 13px;
+  margin-top: 56px;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    margin-top: 83px; 
+    margin-bottom: 0;
+  }
+}
+
+.idt-companies__headline-wrapper:after {
+  content: '';
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 220px;
+  z-index: -1;
+  position: absolute;
+  background-color: #f0f6ff;
+}
+
+.idt-search-formfield {
+  width: 80%;
+
+  ::ng-deep .mat-form-field {
+    color: mat-color($idt-primary, 700) !important;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: mat-color($idt-primary, 700) !important;
+  }
+
+  ::ng-deep .mat-form-field.mat-focused {
+    width: 70%;
+  }
+
+  ::ng-deep mat-form-field.mat-form-field.mat-form-field-appearance-outline>div.mat-form-field-wrapper>div.mat-form-field-flex>div.mat-form-field-infix {
+    padding: 0.4em 0px
+  }
+
+  ::ng-deep mat-form-field.mat-form-field.mat-form-field-appearance-outline>div.mat-form-field-wrapper>div.mat-form-field-flex>div.mat-form-field-infix>span.mat-form-field-label-wrapper {
+    top: -1.5em;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+  }
+
+  @media(max-width: map-get($breakpoints, small)) {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    ::ng-deep .mat-form-field,
+    ::ng-deep .mat-form-field.mat-focused {
+      width: 300px;
+    }
+  }
+}
+
+.idt-search-formfield__wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 48px;
+  margin-bottom: 16px;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    margin-top: 20px;
+    justify-content: center;
+
+  }
+}
+
+.idt-companies__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.idt-mobile {
+  display: none;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    display: block;
+  }
+}

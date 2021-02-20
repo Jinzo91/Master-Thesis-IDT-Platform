@@ -1,0 +1,10 @@
+<idt-header class="idt-desktop"></idt-header>
+<idt-mobile-header class="idt-mobile"></idt-mobile-header>
+<div class="idt-content-wrapper">
+  <div class="margin-bottom-5xl" [ngClass]="{'idt-content': !removeMarginForDashboard}">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<idt-footer></idt-footer>
+
+<div id="background"></div>

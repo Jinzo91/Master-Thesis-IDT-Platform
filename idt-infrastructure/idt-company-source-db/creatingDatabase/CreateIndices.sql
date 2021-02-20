@@ -1,0 +1,14 @@
+USE [idtCompanySource]
+GO
+
+CREATE FULLTEXT CATALOG ftCatalog AS DEFAULT;
+GO
+
+CREATE FULLTEXT INDEX ON company(Name)
+    KEY INDEX PK_company
+    WITH STOPLIST = OFF, SEARCH PROPERTY LIST = OFF;
+GO
+
+CREATE INDEX URLIndex
+ON company(Website);
+GO

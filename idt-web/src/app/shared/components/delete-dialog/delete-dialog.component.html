@@ -1,0 +1,11 @@
+<div class="idt-delete-dialog__container margin-top-s">
+  <div>
+    Are you sure you want to disable this {{entity}}?
+    <br><br>
+    This means that it won't be visible for non-admin users.
+  </div>
+  <div class="idt-delete-dialog__actions margin-top-2m">
+    <button mat-stroked-button color="primary" class="margin-right-xs" [mat-dialog-close]="false">No</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true">Yes</button>
+  </div>
+</div>

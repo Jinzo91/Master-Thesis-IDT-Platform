@@ -1,0 +1,49 @@
+@import "src/styles/idt-theme.scss";
+
+.idt-create-company-dialog__container {
+  padding: 0 24px;
+  max-height: 600px;
+}
+
+.idt-form-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.idt-add-company__actions {
+  display: flex;
+  justify-content: center;
+}
+
+.idt-search-company__name-field,
+.idt-search-company__website-field {
+  width: 70%;
+}
+
+.searchResults {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.mat-row:hover {
+  background-color: mat-color($idt-accent, 100);
+  cursor: pointer;
+}
+
+.selectedCompany {
+  background-color: mat-color($idt-accent, 700) !important;
+}
+
+h6 {
+  width: 100%; 
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin: 10px 0 20px; 
+} 
+
+h6 span { 
+   background:#fff; 
+   padding:0 10px; 
+}

@@ -1,0 +1,30 @@
+<!-- <div class="idt-suggested-companies">
+  Companies you might be interested in:
+</div> -->
+<div class="idt-feed-empty" *ngIf="personalFeedCases === undefined || personalFeedCases.length === 0">
+  <h3>You don't follow any companies or there are no cases for companies you follow.</h3>
+
+  <a (click)="goTo('/companies')" class="idt-dashboard__navigation-item">
+    <mat-icon class="navigation-icon">business</mat-icon>
+    <div class="idt-link">
+        <strong class="idt-semibold">Follow</strong>
+        <br>
+        companies
+    </div>
+  </a>
+</div>
+<div *ngIf="personalFeedCases !== undefined && personalFeedCases.length > 0">
+  <h3>Companies you might be interested in</h3>
+  <div class="idt-refresh-icon-container">
+    <mat-icon class="idt-refresh-icon" (click)="onRefreshSuggestedCompanies()">refresh</mat-icon>
+  </div>
+  <div class="idt-recommended-companies">
+    <idt-company-item *ngFor="let suggestedCompany of suggestedCompanies" [company]="suggestedCompany" (followCompany)="onFollowCompany($event)" (unfollowCompany)="onUnfollowCompany($event)"></idt-company-item>
+  </div>
+  <h3>Your personal feed</h3>
+  <idt-feed-item *ngFor="let personalFeedCase of personalFeedCases" [case]="personalFeedCase" (unfollowCompany)="onUnfollowCompany($event)"></idt-feed-item>
+  <idt-feed-item *ngFor="let suggestedCase of suggestedCases" [case]="suggestedCase" [suggested]="true" (followCompany)="onFollowCompany($event)"></idt-feed-item>
+</div>
+<!-- <div class="idt-suggested-cases">
+  Cases you might be interested in:
+</div> -->

@@ -1,0 +1,254 @@
+@import "src/styles/idt-theme.scss";
+@import 'src/styles/breakpoints.scss';
+
+:host ::ng-deep .mat-input-element:disabled,
+:host ::ng-deep .mat-select-disabled .mat-select-value {
+    color: black;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline {
+    background-image: none;
+}
+
+:host ::ng-deep .mat-form-field .mat-select.mat-select-disabled .mat-select-arrow {
+    color: rgba(0, 0, 0, 0);
+}
+
+.idt-company__form-label {
+    width: 120px;
+}
+
+.idt-company__form-row {
+    display: flex;
+    align-items: flex-start;
+}
+
+.idt-company__form-row + .idt-company__form-row {
+    margin-top: 4px;
+}
+
+.idt-company-detail__main-container {
+  display: flex;
+  flex-flow: row;
+  border-radius: 5px;
+  padding: 24px 48px;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    flex-flow: column;
+    padding: 0;
+  }
+}
+
+.idt-company-detail__left-container,
+.idt-company-detail__right-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.idt-company-detail__left-container {
+  background: #f2f2f2;
+  height: 100%;
+}
+
+.idt-company-detail__right-container {
+  flex-basis: 100%;
+  padding: 0 24px;
+}
+
+.idt-company-detail__title-field {
+  width: 100%;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    text-align: center;
+  }
+}
+
+.idt-company-detail__title-input {
+  font-size: 26px;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    font-size: 36px;
+  }
+}
+
+.idt-company-detail__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  padding-left: 48px;
+  padding-right: 72px;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    justify-content: space-between;
+    padding: 0;
+  }
+}
+
+.idt-company-detail__img-div,
+.idt-company-detail__header-div{
+    height: 100px;
+}
+
+.idt-mobile.idt-company-detail__header-div {
+  display: none;
+
+  @media(max-width: map-get($breakpoints, medium))  {
+    display: flex;
+    text-align: center;
+  }
+}
+
+.idt-company-detail__header-div {
+  display: flex;
+}
+
+.idt-company-detail__img-div {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: 0px 16px;
+}
+
+.idt-company-detail__img-div--edited {
+  cursor: pointer;
+}
+
+.idt-company__title-img--edited {
+  opacity: 0.4;
+}
+
+.mat-list-item {
+    font-size: smaller;
+}
+
+.idt-company__title-img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.idt-company__edit-img {
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 24px;
+  transform: translate(-50%, -50%);
+  font-weight: 500;
+}
+
+.mat-card-image {
+    width: unset;
+}
+
+.idt-icon-button {
+  min-width: 40px !important;
+  padding: 0;
+}
+
+.idt-company__company-detail {
+  width: 180px;
+}
+
+.idt-company-detail__details-title {
+  font-weight: 500;
+  padding: 16px 16px 12px 16px;
+}
+
+.idt-company-detail__description-div {
+  margin-top: -60px;
+  display: flex;
+  word-break: break-word;
+
+  @media(max-width: map-get($breakpoints, medium))  {
+    margin-top: 0;
+  }
+}
+
+.idt-company-detail__description-field {
+  flex-basis: 100%;
+  text-align: justify;
+  line-height: 20px;
+}
+
+.idt-company-detail__cases-header {
+  font-size: 18px;
+
+  @media(max-width: map-get($breakpoints, medium))  {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+.idt-company-detail__case-list {
+  padding: 0 72px 0 48px;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    padding: 0;
+  }
+}
+
+::ng-deep .mat-list-base .mat-list-item .mat-list-item-content {
+  align-items: flex-start !important;
+}
+
+.idt-company__form-row ::ng-deep .mat-form-field-infix {
+  margin-top: -20px;
+
+  // @media(max-width: map-get($breakpoints, medium))  {
+  //   margin-top: 20px;
+  // }
+}
+
+:host ::ng-deep .mat-list-base .mat-list-item {
+  height: 100%;
+  min-height: 40px;
+}
+
+.idt-divider {
+  margin: 0 24px 12px 16px;
+}
+
+.idt-company-detail__header {
+  margin-top: 40px;
+
+  @media(max-width: map-get($breakpoints, medium))  {
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
+}
+
+.idt-company-follow {
+  border: 2px solid #213775;
+  border-radius: 20px;
+  text-align: center;
+  background-color: white;
+  color: #213775;
+  padding: 5px;
+  font-weight: bold;
+  width: 30%;
+  margin: auto;
+}
+
+.idt-company-follow:hover{
+  color: white;
+  background-color: #213775;
+  cursor: pointer;
+}
+
+.idt-company-unfollow{
+  border: 2px solid #213775;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #213775;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  width: 30%;
+  margin: auto;
+}
+
+
+.idt-company-unfollow:hover {
+  cursor: pointer;
+}

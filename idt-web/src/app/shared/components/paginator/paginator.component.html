@@ -1,0 +1,30 @@
+<div class="idt-paginator__container">
+  <mat-paginator
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="length$ | async"
+    [pageSize]="pageSize"
+    (page)="page.emit($event)"
+  >
+  </mat-paginator>
+  <div class="idt-paginator__page-buttons">
+    <button mat-icon-button class="idt-paginator-button idt-paginator-icon-button" (click)="onClick(0)"
+            [disabled]="paginator.pageIndex === 0">
+      <mat-icon>first_page</mat-icon>
+    </button>
+    <button mat-icon-button class="idt-paginator-button idt-paginator-icon-button" (click)="onClick(paginator.pageIndex - 1)"
+            [disabled]="paginator.pageIndex === 0">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <button mat-button *ngFor="let index of previousIndexes$ | async" (click)="onClick(index)" class="idt-paginator-button">{{index + 1}}</button>
+    <button mat-flat-button class="idt-paginator-button idt-paginator-button-focused" color="primary">{{paginator.pageIndex + 1}}</button>
+    <button mat-button *ngFor="let index of nextIndexes$ | async" (click)="onClick(index)" class="idt-paginator-button">{{index + 1}}</button>
+    <button mat-icon-button class="idt-paginator-button idt-paginator-icon-button"
+            (click)="onClick(paginator.pageIndex + 1)" [disabled]="paginator.pageIndex === (paginator.getNumberOfPages() - 1)">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+    <button mat-icon-button class="idt-paginator-button idt-paginator-icon-button"
+            (click)="onClick(paginator.getNumberOfPages() - 1)" [disabled]="paginator.pageIndex === (paginator.getNumberOfPages() - 1)">
+      <mat-icon>last_page</mat-icon>
+    </button>
+  </div>
+</div>

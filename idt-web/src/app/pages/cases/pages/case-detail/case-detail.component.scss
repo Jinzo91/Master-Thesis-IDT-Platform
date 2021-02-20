@@ -1,0 +1,459 @@
+@import "src/styles/idt-theme.scss";
+@import 'src/styles/breakpoints.scss';
+
+.idt-case-detail {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 48px;
+  margin-top: 48px;
+  text-align: left;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    padding: 12px 0;
+    margin-top: 0;
+  }
+}
+
+.idt-case-detail__row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.idt-case__form-label {
+  width: 120px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+  margin-top: -23px;
+}
+
+:host ::ng-deep .idt-tag-autocomplete .mat-form-field-infix {
+  padding-bottom: 20px;
+  padding-top: 12px;
+}
+
+:host ::ng-deep .idt-tag-autocomplete {
+  margin-top: 16px;
+  width: 100%;
+}
+
+:host ::ng-deep .mat-input-element:disabled {
+  color: black;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline {
+  background-image: none;
+}
+
+.mat-raised-button.mat-raised-button {
+  margin-left: 12px;
+}
+
+.idt-case-detail__img-div {
+  height: auto;
+  width: 100px;
+  position: relative;
+  padding: 0px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.idt-case__title-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.idt-case-detail__company {
+  padding: 24px 0;
+  margin-top: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f2f2f2;
+  pointer-events: auto !important;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    margin-top: 0;
+  }
+}
+
+.idt-case-detail__title {
+  font-size: 26px;
+  width: 100%;
+  overflow: hidden; // prevents the bug that the user gets a scroll bar
+  margin-bottom: 1rem;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    text-align: center;
+    font-size: 36px;
+  }
+}
+
+.idt-case-detail__description-row {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding-left: 30px;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    padding-left: 0;
+  }
+}
+
+.idt-case-detail__right {
+  flex: 3;
+  position: relative;
+}
+
+.idt-case-detail__left {
+  flex: 1;
+  z-index: 0;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    padding-right: 0;
+  }
+}
+
+.idt-case-detail__card {
+  display: flex;
+  pointer-events: none;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    flex-direction: column;
+  }
+}
+
+.idt-details__geom-image {
+  height: 420px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-position: center;
+  background-size: cover;
+  display: block;
+  pointer-events: auto;
+}
+
+.idt-details__geom-image--edited {
+  cursor: pointer;
+  background: rgb(255,255,255, 0.4) !important;
+}
+
+.idt-details__geom-image:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  height: 420px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  // background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(254, 254, 255, 1) 0%, rgba(254, 254, 255, 0.4) 33%, rgba(254, 254, 255, 0.4) 67%, rgba(254, 254, 255, 1) 100%);
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    background: rgba(255, 255, 255, 0.7);
+
+  }
+}
+
+.idt-details__edit-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding-bottom: 100px;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(white, 0.3);
+  color: rgba(mat-color($idt-primary, 600), 0.8);
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    display: none;
+  }
+}
+
+.idt-case-details__content {
+  margin-top: 110px;
+  min-height: 150px;
+  pointer-events: auto !important;
+  background: white;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    margin-top: 16px;
+  }
+}
+
+.idt-case-detail__basic-info {
+  padding: 24px;
+  background: #f2f2f2;
+  pointer-events: auto !important;
+}
+
+.idt-case-detail__info-title {
+  font-weight: 500;
+  padding-bottom: 16px;
+}
+
+.idt-details__actions {
+  position: absolute;
+  right: 0;
+  top: 60px;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    position: static;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+::ng-deep idt-link {
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.idt-case-detail__row.idt-with-margin {
+  margin-top: 12px;
+}
+
+.idt-case-detail__description,
+.idt-case-detail__description-input {
+  text-align: justify !important;
+  line-height: 20px;
+  padding-right: 30px;
+  margin-top: -8px;
+  white-space: pre-line;
+
+  textarea {
+    overflow-y: auto;
+    max-height: 520px;
+  }
+
+
+  @media(max-width: map-get($breakpoints, small)) {
+    padding-right: 0;
+    margin-top: 8px;
+  }
+}
+
+.idt-icon-button {
+  min-width: 40px !important;
+  padding: 0;
+}
+
+.idt-case-detail__back-button,
+.idt-case-detail__mobile-back-button {
+  pointer-events: auto;
+}
+
+.idt-case-detail__back-button {
+  position: absolute;
+  top: 220px;
+}
+
+.idt-case-detail__title-wrapper {
+  display: flex;
+  padding-left: 30px;
+  padding-top: 44px;
+  padding-right: 8px;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    display: none;
+  }
+}
+
+.idt-case-details__featured-star {
+  cursor: pointer;
+}
+
+.mat-stroked-button {
+  background: rgba(white, 0.6);
+}
+
+button {
+  pointer-events: auto !important;
+}
+
+.idt-case-details__title-star {
+  display: flex;
+  justify-content: flex-start;
+  justify-content: space-between;
+
+}
+
+.idt-case-detail__title-inner-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.idt-case-detail__description {
+  max-height: 520px;
+  overflow: hidden;
+  transition: all 1s ease-in-out;
+}
+
+
+.idt-case-detail__description.is-expanded {
+  height: 100%;
+  max-height: 2000px;
+  transition: all 1s ease-out;
+}
+
+.idt-case-detial__read-more-button {
+  text-align: left;
+  padding-left: 0;
+  margin-top: 16px;
+}
+
+.idt-case-detail__source-title {
+    display: flex;
+    align-items: center;
+  }
+
+  .idt-case-detail__sources-wrapper {
+    margin-left: 48px;
+  }
+   .idt-case-detail__tech-tag {
+     cursor: pointer;
+   }
+
+  .idt-case-detail__sources-list {
+    width: 100%;
+    padding: 8px 30px 20px 30px;
+  }
+
+  .is-hidden {
+    display: none;
+  }
+
+  .idt-case-list__description-cell {
+    max-width: 300px;
+    min-width: 180px;
+    padding: 12px 12px 12px 0;
+  }
+
+  .idt-case-list__title-cell {
+    max-width: 270px;
+    min-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 16px;
+  }
+
+  .idt-case-detail__icon-cell {
+    width: 80px;
+  }
+
+  .idt-case-detail__file-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+.idt-case-detail__comments-wrapper {
+
+  margin: 40px 0 0 48px;
+
+  .idt-case-detail__comments-input-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+
+    .idt-case-detail__comments-user {
+      .idt-case-detail__comments-user-img {
+        height: 50px;
+        width: 50px;
+      }
+    }
+
+
+    .idt-case-detail__comments-input {
+      width: 100%;
+      margin: 10px 0 0 10px;
+
+      mat-form-field {
+        width: 100%;
+      }
+
+      textarea{
+        white-space: pre-wrap;
+      }
+    }
+  }
+
+
+  .idt-case-detail__comments-button {
+    text-align: right;
+    margin-bottom: 40px;
+  }
+
+  .idt-case-detail__comments-container {
+
+    .idt-case-detail__comments {
+      margin: 20px 10px;
+      padding: 10px;
+      position: relative;
+      display: flex;
+      flex-direction: row;
+
+
+      .idt-case-detail__comments-menu {
+        @media(max-width: map-get($breakpoints, small)) {
+          margin-top: -5px;
+        }
+
+        position: absolute;
+        right: 10px;
+      }
+
+      .idt-case-detail__comments-user-img {
+        height: 50px;
+        width: 50px;
+      }
+
+      .idt-case-detail__comment-header{
+        padding: 10px;
+
+        .idt-case-detail__comment-creator{
+          font-weight: bold;
+          display: inline;
+          margin-right: 10px;
+        }
+
+        .idt-case-detail__comment-date{
+
+          @media(max-width: map-get($breakpoints, small)) {
+            display: inline-block;
+            margin-top: 5px;
+          }
+
+          color: gray;
+          display: inline;
+        }
+      }
+
+
+      .idt-case-detail__comment{
+        padding: 10px;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+    }
+  }
+
+  .idt-case-detail__comments-login {
+    width: fit-content;
+    margin: auto;
+  }
+
+}

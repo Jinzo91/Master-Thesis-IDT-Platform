@@ -1,0 +1,52 @@
+/* HELPER CLASSES */
+$margins : (
+  2xs : 8px,
+  xs  : 12px,
+  s   : 16px,
+
+  m   : 24px,
+  2m  : 32px,
+  3m  : 40px,
+  4m  : 48px,
+
+  l   : 56px,
+  xl  : 64px,
+  2xl : 72px,
+  3xl : 80px,
+  4xl : 88px,
+  5xl : 96px
+);
+
+@mixin create-margin-classes() {
+    $positions: 'top', 'bottom', 'left', 'right';
+
+    @each $key, $value in $margins {
+      .margin-#{$key} {
+        margin: $value !important;
+      }
+
+      .margin-x-#{$key} {
+        margin: 0 $value !important;
+      }
+
+      .margin-y-#{$key} {
+        margin: $value 0 !important;
+      }
+
+      @each $position in $positions {
+        .margin-#{$position}-#{$key} {
+          margin-#{$position}: $value !important;
+        }
+      }
+    }
+
+    @each $position in $positions {
+      .margin-#{$position}-0 {
+        margin-#{$position}: 0 !important;
+      }
+    }
+
+    .margin-0 {
+      margin: 0 !important;
+    }
+  }

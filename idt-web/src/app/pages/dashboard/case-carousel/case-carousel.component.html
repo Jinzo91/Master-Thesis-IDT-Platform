@@ -1,0 +1,35 @@
+<div class="idt-carousel" [class.idt-carousel--disabled]="slides && slides.length < 2">
+
+  <mat-icon class="idt-carousel__link idt-carousel__link--left idt-carousel__previous" (click)="prev()"
+    name="carousel-arrow">chevron_left</mat-icon>
+
+  <div class="idt-carousel__wrapper">
+    <div class="idt-carousel__slides u-text-align-center" [style.transform]="getLeftPosition()">
+      <div *ngFor="let slide of slides; let i = index" class="idt-carousel__slide"
+        [class.idt-carousel__slide--hidden]="i !== selected" [attr.aria-hidden]="i === selected ? false : true">
+
+        <div class="idt-carousel-item" [routerLink]="getCaseLink(slide.index)">
+          <div class="idt-carousel-item__image">
+            <img class="idt-carousel-item__img" [src]="slide.image">
+          </div>
+          <div class="idt-carousel-item__text">
+            <h3 class="idt-carousel__title"> {{slide.title}} </h3>
+            <span class="idt-carousel__creationDate"> {{slide.creationDate | date}} </span>
+            <p class="idt-carousel__description"> {{slide.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+    <div class="idt-carousel__indicators">
+      <div
+       *ngFor="let item of slides; let i = index"
+       (click)="selected = i"
+        class="idt-carousel__indicator"
+        [class.is-active]="i === selected">
+      </div>
+    </div>
+    <mat-icon (click)="next()" class="idt-carousel__link idt-carousel__link--right idt-carousel__next"
+    name="carousel-arrow">chevron_right</mat-icon>
+</div>

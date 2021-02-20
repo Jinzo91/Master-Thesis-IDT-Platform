@@ -1,0 +1,9 @@
+<i *ngIf="type !== 'success'" class="material-icons idt-toaster__icon">
+  {{ type }}
+</i>
+
+<i *ngIf="type === 'success'" class="material-icons idt-toaster__icon">
+  check_circle
+</i>
+
+{{ data.message }}

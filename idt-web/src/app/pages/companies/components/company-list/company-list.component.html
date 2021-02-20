@@ -1,0 +1,63 @@
+<div class="mat-elevation-z8" [class.is-hidden]="dataEmpty$ | async">
+  <table mat-table [dataSource]="tableData$ | async" matSort>
+
+    <!-- Company name Column -->
+    <ng-container matColumnDef="logo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+      <td mat-cell *matCellDef="let row"> <img width="50px" (error)="defaultImage($event)" [src]="companyService.getLogo(row.id)" /> </td>
+    </ng-container>
+
+    <!-- Company name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Company Name </th>
+      <td mat-cell *matCellDef="let row" [innerHTML]="row.name | highlight : searchString"></td>
+    </ng-container>
+
+     <ng-container matColumnDef="industry">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Industry </th>
+      <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.industry}} </td>
+    </ng-container>
+
+
+    <!-- Created on Column -->
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Created on </th>
+      <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.createdAt | date}} </td>
+    </ng-container>
+
+    <!-- Disable Column -->
+    <ng-container matColumnDef="disabled" *ngIf="isAdmin()">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let row" [style.color]="row.color">
+        <mat-chip-list>
+          <mat-chip *ngIf="row.disabled" color="warn" selected>Disabled</mat-chip>
+          <mat-chip *ngIf="!row.disabled" selected>Enabled</mat-chip>
+        </mat-chip-list>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="followCompany">
+      <th mat-header-cell *matHeaderCellDef> Following </th>
+      <td mat-cell *matCellDef="let row">
+        <div *ngIf="!isUserFollowingCompany(row.id)" class="idt-company-follow" (click)="onFollowCompany($event, row.id)"> Follow </div>
+        <div *ngIf="isUserFollowingCompany(row.id)" class="idt-company-unfollow" (click)="onUnfollowCompany($event, row.id)"> Unfollow </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)">
+    </tr>
+  </table>
+  <idt-app-paginator
+    [pageSizeOptions]="[10, 25, 50, 100]"
+    [length]='totalResults$'
+    [pageSize]='pageSize'
+    [currentPage]="currentPage$"
+    (page)="paginationChanges$.next($event)"
+  ></idt-app-paginator>
+  <div class="idt-loading-shade" *ngIf="!(dataLoaded$ | async)">
+    <idt-loader *ngIf="!(dataLoaded$ | async)"></idt-loader>
+  </div>
+</div>
+
+<div *ngIf="(dataLoaded$ | async) && (dataEmpty$ | async)">No case meets the search conditions</div>

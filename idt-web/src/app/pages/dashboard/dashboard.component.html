@@ -1,0 +1,62 @@
+<div class="idt-dashboard">
+  <div class="idt-dashboard__teaser-image"></div>
+  <div class="idt-dashboard__overview">
+    <div class="idt-dashboard__overview-text">
+      <h1 class="idt-dashboard__main-title"> Initiative for Digital Transformation </h1>
+      <p class="idt-dashboard__main-description">The world's largest knowledge base on digital transformation</p>
+
+      <div class="idt-dashboard__navigation-items">
+        <a routerLink="/cases" class="idt-dashboard__navigation-item">
+          <mat-icon class="navigation-icon">find_in_page</mat-icon>
+          <div class="idt-link">
+              <strong class="idt-semibold">Discover</strong> innovative cases </div>
+        </a>
+        <a routerLink='/' fragment="top-technologies" class="idt-dashboard__navigation-item">
+          <mat-icon class="navigation-icon">double_arrow</mat-icon>
+          <div class="idt-link">
+              <strong class="idt-semibold">Follow</strong> top
+              technologies
+          </div>
+        </a>
+        <a routerLink="/cases" class="idt-dashboard__navigation-item">
+          <mat-icon class="navigation-icon">note_add</mat-icon>
+          <div class="idt-link">
+              <strong class="idt-semibold">Contribute</strong> by adding new
+              cases
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="(featuredCases$ | async)?.length" class="idt-dashboard__caroussel-wrapper">
+  <h3 id="popular" class="idt-dashboard__popular-cases-title margin-bottom-l"> Popular Cases</h3>
+  <idt-case-carousel [slides]="featuredCases$ | async">
+  </idt-case-carousel>
+</div>
+
+<div class="idt-dashboard__recent-news margin-top-m">
+  <div class="idt-dashboard__recent-cases-wrapper">
+    <h3 class="idt-dashboard__recent-cases-headline">Recent Cases</h3>
+    <idt-case-card
+        *ngFor="let case of recentCases | async"
+        (technologyClicked)="goToFilteredCases($event)"
+        [case]="case"></idt-case-card>
+    <idt-link link="/cases">
+      See more <mat-icon>chevron_right</mat-icon>
+    </idt-link>
+  </div>
+</div>
+
+
+<br>
+<br>
+<div *ngIf="isAdmin()">
+  <mat-form-field>
+    <input matInput placeholder="Email for invitation" [(ngModel)]="emailValue" required>
+  </mat-form-field>
+
+  <button mat-raised-button (click)="invite()">invite</button>
+</div>

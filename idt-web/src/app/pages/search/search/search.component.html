@@ -1,0 +1,38 @@
+
+<h1 class="margin-top-3m margin-bottom-m">
+  Search results for '{{(urlParams$ | async).query}}'
+</h1>
+<div>
+  <a class="idt-link" (click)="goToCases()" ><mat-icon class="idt-search-icon">arrow_forward</mat-icon> Search only in cases</a>
+</div>
+<div>
+  <a class="idt-link" (click)="goToCompanies()" ><mat-icon class="idt-search-icon">arrow_forward</mat-icon> Search only in companies</a>
+</div>
+
+<div *ngIf="((caseResults$ | async) && (companyResults$ | async)); else loading">
+  <h3 class="margin-top-3m">Cases</h3>
+  <idt-case-list
+    [data]="caseResults$"
+    [searchString]="searchString$"
+    (pageChanged)="caseCurrentPage$.next($event)"
+    (pageSizeChanged)="caseCurrentPageSize$.next($event)"
+    (sortChanged)="caseCurrentSort$.next($event)">
+  </idt-case-list>
+  
+  <h3 class="margin-right-xs">Companies</h3>
+  <idt-company-list
+    [data]="companyResults$"
+    [searchString]="searchString$"
+    (pageChanged)="companyCurrentPage$.next($event)"
+    (pageSizeChanged)="companyCurrentPageSize$.next($event)"
+    (sortChanged)="companyCurrentSort$.next($event)">
+  </idt-company-list>
+  
+</div>
+
+<ng-template #loading>
+  <div style="display: block; height: 100px"></div>
+  <idt-loader></idt-loader>
+</ng-template>
+
+

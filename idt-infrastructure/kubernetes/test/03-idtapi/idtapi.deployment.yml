@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idtapi
+  namespace: idt-test
+spec:
+  selector:
+    matchLabels:
+      app: idtapi
+  template:
+    metadata:
+      labels:
+        app: idtapi
+        type: deployable
+    spec:
+      containers:
+      - name: idtapi
+        image: idtcr.azurecr.io/idt-api:test
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: test
+        - name: HOST_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: MSSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mssql
+              key: SA_PASSWORD
+      imagePullSecrets:
+      - name: idtcr

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idtapi
+  namespace: company-source
+spec:
+  selector:
+    matchLabels:
+      app: idtapi
+  template:
+    metadata:
+      labels:
+        app: idtapi
+        type: deployable
+    spec:
+      containers:
+      - name: idtapi
+        image: company-source:local
+        resources:
+          requests:
+            memory: "150Mi"
+          limits:
+            memory: "200Mi"
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 4000
+        env:
+        - name: NODE_ENV
+          value: prod
+        - name: HOST_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: MSSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mssql
+              key: SA_PASSWORD
+      imagePullSecrets:
+      - name: idtcr

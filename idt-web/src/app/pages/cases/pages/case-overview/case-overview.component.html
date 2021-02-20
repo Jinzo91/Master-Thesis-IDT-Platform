@@ -1,0 +1,159 @@
+<div class="idt-cases__headline-wrapper">
+    <a *ngIf="userRole !== 'visitor'" class="idt-add-case-button idt-mobile" mat-raised-button color="accent"
+    (click)="openCreateCaseDialog()"> Add new case </a>
+  <h3 class="idt-cases__headline"> Digital Transformation Cases</h3>
+</div>
+<div class="idt-case-overview__navigation">
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Overview">
+      <div class="idt-case-overview__section">
+        <form [formGroup]="filterForm" class="idt-add-case__filter-form">
+          <div class="idt-search-formfield__wrapper">
+            <div class="idt-search-formfield">
+              <mat-form-field appearance="outline">
+                <mat-label>Search in cases</mat-label>
+                <input matInput formControlName="search" placeholder="Search for a specific case">
+                <mat-icon class="search-icon" matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+            <a *ngIf="userRole !== 'visitor'" class="idt-add-case-button idt-desktop" mat-raised-button color="accent"
+              (click)="openCreateCaseDialog()"> Add new case </a>
+
+          </div>
+          <div class="idt-search__filters">
+            <mat-form-field class="margin-right-s">
+              <mat-label>Case Type</mat-label>
+              <mat-select multiple formControlName="caseTypes">
+                <mat-option *ngFor="let type of caseTypes" [value]="type">{{type.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="margin-right-s">
+              <mat-select formControlName="companies" placeholder="Company" [multiple]="true" [compareWith]="compareFilters">
+                <mat-option>
+                  <ngx-mat-select-search
+                  [formControl]="companyFilteringCtrl"
+                  [searching]="isSearchingForCompanies"
+                  placeholderLabel="Search"
+                  noEntriesFoundLabel="No entries found">
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let company of appliedCompanyFilters" [value]="company">
+                  {{company.name}}
+                </mat-option>
+                <mat-option *ngFor="let company of filteredServerSideCompanies$ | async" [value]="company">
+                  {{company.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- <idt-select-filter [items]="allTechnologies$" label="Technologies"></idt-select-filter> -->
+            <mat-form-field class="margin-right-s">
+              <mat-label>Technologies</mat-label>
+              <mat-select formControlName="technologies" placeholder="Technologies" [multiple]="true" [compareWith]="compareFilters">
+                <mat-option>
+                  <ngx-mat-select-search
+                  [formControl]="technologiesFilteringCtrl"
+                  [searching]="isSearchingForTechnologies"
+                  placeholderLabel="Search"
+                  noEntriesFoundLabel="No entries found">
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let technology of allTechnologies$" [value]="technology">{{technology.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button
+              mat-stroked-button color="primary" (click)="removeAllFilters()"
+              [disabled]="(this.filterForm.controls.caseTypes.value.length +
+                          this.filterForm.controls.companies.value.length +
+                          this.filterForm.controls.technologies.value.length)
+                          < 1"> Clear all filters
+            </button>
+          </div>
+        </form>
+      </div>
+     <div class="idt-case-overview__applied-filters">
+      <mat-chip-list>
+        <mat-chip
+          *ngFor="let type of filterForm.controls.caseTypes.value"
+          (removed)="removeCaseTypeFilter(type)"
+          removable="true">
+          {{type.name}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <mat-chip
+          *ngFor="let company of filterForm.controls.companies.value"
+          (removed)="removeCompanyFilter(company)"
+          removable="true">
+          {{company.name}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+       </mat-chip>
+        <mat-chip
+          *ngFor="let technology of filterForm.controls.technologies.value"
+          (removed)="removeTechnologyFilter(technology)"
+          removable="true">
+          {{technology.name}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+     </div>
+      <div class="test">
+        <div class="idt-case-overview__list margin-top-s">
+          <idt-case-list
+            [data]="cases$"
+            [searchString]="searchString$"
+            [currentPage]="currentPage$"
+            (pageChanged)="currentPage$.next($event)"
+            (pageSizeChanged)="currentPageSize$.next($event)"
+            (sortChanged)="currentSort$.next($event)">
+          </idt-case-list>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Charts">
+      <ng-template matTabContent>
+        <div class="idt-case-overview__charts">
+          <div class="idt-dashboard__chart-wrapper margin-bottom-2m">
+            <h3 class="idt-dashboard__counts-title idt-dashboard__chart-title margin-top-l">Top technologies</h3>
+            <div class="idt-dashboard__top-techs">
+              <!-- the ngIf is needed otherwise the charts don't react on data change -->
+              <google-chart *ngIf="topTechnologies" [data]="topTechnologies" type="BarChart"
+                [options]="optionsTechChart" [columnNames]="columnNamesTech">
+              </google-chart>
+            </div>
+          </div>
+          <div class="idt-dashboard__chart-wrapper margin-bottom-2m">
+            <h3 class="idt-case-overview__chart-title">Top companies by cases</h3>
+            <div class="idt-dashboard__top-techs">
+              <!-- the ngIf is needed otherwise the charts don't react on data change -->
+              <google-chart *ngIf="topCompanies" [data]="topCompanies" type="ColumnChart"
+                [options]="optionsCompanyChart" [columnNames]="columnNamesTopCompanies">
+              </google-chart>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="userRole !== 'visitor'" class="idt-dashboard__chart-wrapper margin-bottom-2m">
+            <h3 class="idt-case-overview__chart-title">Top contributors of the month</h3>
+            <div class="idt-dashboard__top-techs">
+              <!-- the ngIf is needed otherwise the charts don't react on data change -->
+              <google-chart *ngIf="topContributorsMonth" [data]="topContributorsMonth" type="ColumnChart"
+                [options]="optionsCompanyChart" [columnNames]="columnNamesTopContributors">
+              </google-chart>
+            </div>
+        </div>
+
+
+        <div *ngIf="userRole !== 'visitor'" class="idt-dashboard__chart-wrapper">
+            <h3 class="idt-case-overview__chart-title">Top contributors of all time</h3>
+            <div class="idt-dashboard__top-techs">
+              <!-- the ngIf is needed otherwise the charts don't react on data change -->
+              <google-chart *ngIf="topContributors" [data]="topContributors" type="ColumnChart"
+                [options]="optionsCompanyChart" [columnNames]="columnNamesTopContributors">
+              </google-chart>
+            </div>
+        </div>
+
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

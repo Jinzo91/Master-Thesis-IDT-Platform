@@ -1,0 +1,65 @@
+<mat-card class="subscription-card" *ngIf="!isLoading && !resultType">
+    <mat-card-content>
+        <h3>
+            Unsubscribe from IDT weekly
+        </h3>
+        <p>
+            Do you really want to unsubscribe from IDT weekly?
+        </p>
+        <p class="loading-indicator">
+            <button style="margin: 0 12px;" mat-raised-button (click)="unsubscribe()">
+                Unsubscribe
+            </button>
+            <button style="margin: 0 12px;" mat-raised-button color="primary" (click)="goToDashboard()">
+                Back
+            </button>
+        </p>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="subscription-card" *ngIf="isLoading">
+    <mat-card-content>
+        <h3>
+            Activating your IDT weekly subscription!
+        </h3>
+        <p>
+            Please stand by for a little moment as we are activating your subscription.
+        </p>
+        <p class="loading-indicator">
+            Loading ...
+        </p>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="subscription-card" *ngIf="!isLoading && resultType === 'success'">
+    <mat-card-content>
+        <h3>
+            You have been unsubscribed!
+        </h3>
+        <p>
+            Your IDT weekly subscription is now deactivated.
+        </p>
+        <p class="loading-indicator">
+            <button *ngIf="!isLoading" mat-raised-button (click)="goToDashboard()">
+                go to dashboard
+            </button>
+        </p>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="subscription-card" *ngIf="!isLoading && resultType === 'error'">
+    <mat-card-content>
+        <h3>
+            Error!
+        </h3>
+        <p>
+            Unfortunately your subscription could not be deactivated. Maybe it already is deleted or you have clicked the
+            wrong link. If neither is the case please try again later.
+        </p>
+        <p class="loading-indicator">
+            <button *ngIf="!isLoading" mat-raised-button (click)="goToDashboard()">
+                go to dashboard
+            </button>
+        </p>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,49 @@
+.user-wrapper:after {
+  content: '';
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 300px;
+  z-index: -1;
+  position: absolute;
+  background-color: #f0f6ff;
+}
+
+.big-icon {
+  transform: scale(4);
+  margin-left: 20%;
+  margin-bottom: 30px;
+}
+
+.profile-area {
+  display: inline-block;
+  width:80%;
+  height: 200px;
+  margin-top: 8%;
+  text-align: center;
+}
+
+.profile-area-text {
+  margin-top: 0%;
+}
+
+.profile-area-name {
+  margin-left: 20%;
+  font-size: 20px;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+.profile-area-email {
+  margin-left: 20%;
+  font-size: 20px;
+  vertical-align: top;
+}
+
+.icons {
+  vertical-align: bottom;
+}
+
+.contribution-text {
+  font-weight: bold;
+}

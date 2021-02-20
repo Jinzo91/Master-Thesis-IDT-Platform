@@ -1,0 +1,295 @@
+@import 'src/styles/breakpoints.scss';
+@import "src/styles/idt-theme.scss";
+
+.idt-dashboard__teaser-image {
+  height: 600px;
+  max-height: 95vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-image: url("../../../assets/test2.jpeg");
+  background-position: right;
+  display: block;
+  transform: scaleX(-1);
+  pointer-events: auto;
+  z-index: -1;
+  filter: saturate(70%);
+
+  @media(max-width: map-get($breakpoints, small)) {
+    height: 290px;
+  }
+}
+
+.idt-dashboard__teaser-image:after {
+  height: 600px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  background: rgba(white, 0.2);
+}
+
+.idt-dashboard__overview-counts {
+  display: flex;
+  justify-content: space-around;
+}
+
+.idt-dashboard__overview {
+  display: flex;
+  align-items: center;
+  height: 535px;
+  max-height: 85vh;
+
+  @media(max-width: map-get($breakpoints, small)) {
+   height: auto;
+   max-height: 100%;
+  }
+}
+
+.idt-dashboard__counts {
+  display: flex;
+  padding-top: 16px;
+  justify-content: center;
+}
+
+.idt-dashboard__company-counts,
+.idt-dashboard__case-counts,
+.idt-dashboard__file-counts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.idt-dashboard__case-counts {
+  margin-right: 40px;
+
+  @media(max-width: map-get($breakpoints, medium)) {
+    margin-right: 12px;
+  }
+}
+
+.idt-dashboard__charts {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.idt-dashboard__chart-title {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.idt-dashboard__statistics-container {
+  background: #f0f6ff;
+  padding: 16px 0 36px 0;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.idt-dashboard__recent-news {
+  display: flex;
+  flex-direction: row;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    flex-direction: column;
+  }
+}
+
+.idt-dashboard__recent-cases-wrapper {
+  width: 100%;
+  margin: 0 8px;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.idt-dashboard__counts-title {
+  text-align: center;
+}
+
+.idt-dashboard__statistic {
+  width: 30%;
+  margin-left: 24px;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 40px;
+  }
+}
+
+.idt-dashboard__top-techs {
+  display: flex;
+  justify-content: center;
+}
+
+.idt-dashboard__top-companies-title {
+  margin-left: 24px;
+}
+
+.idt-dashboard__recent-cases-headline {
+  margin-top: 0;
+  font-weight: 300 !important;
+  font-size: 30px;
+}
+
+.idt-case-card:last-of-type {
+  margin-bottom: 24px;
+}
+
+.idt-dashboard__overview-text {
+  padding: 0 40px 20px 40px;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    padding: 0;
+    margin-top: 50px;
+    max-width: 100%;
+  }
+}
+
+.idt-dashboard__caroussel-wrapper {
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+
+.idt-dashboard__main-title {
+  font-size: 36px;
+  font-weight: 300 !important;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    text-align: center;
+  }
+}
+
+.idt-dashboard__main-description {
+  max-width: 700px;
+  width: 100%;
+  margin-top: 0;
+  font-size: 20px;
+  line-height: 32px;
+  text-align: center;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    margin-top: 60px;
+  }
+}
+
+.idt-semibold {
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.idt-dashboard__navigation-item {
+  padding: 24px;
+  background: rgba(white, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 170px;
+  white-space: pre;
+  height: 100px;
+
+  ::ng-deep .idt-link {
+    color: mat-color($idt-primary, 500);
+    font-size: 20px;
+  }
+
+  .navigation-icon {
+    margin-bottom: 12px;
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    color: mat-color($idt-primary, 500);
+  }
+
+  @media(max-width: map-get($breakpoints, small)) {
+    padding: 0 12px;
+    margin-top: 12px;
+    max-width: 100%;
+    width: 300px;
+    background: mat-color($idt-primary, 500);
+    flex-direction: row;
+    height: 70px;
+
+    ::ng-deep .idt-link,
+    .navigation-icon {
+      color: white;
+      margin-bottom: 0;
+    }
+
+    .navigation-icon {
+      padding-right: 30px;
+    }
+  }
+
+}
+
+.idt-dashboard__navigation-item:hover {
+    background: mat-color($idt-primary, 500);
+    color: white;
+    cursor: pointer;
+
+    .navigation-icon {
+      color: white;
+    }
+
+    ::ng-deep .idt-link {
+      color: white;
+    }
+}
+
+.idt-dashboard__navigation-item + .idt-dashboard__navigation-item {
+  margin-left: 40px;
+
+  @media(max-width: map-get($breakpoints, small)) {
+    margin-left: 0;
+  }
+}
+
+.idt-dashboard__popular-cases-title {
+  margin-bottom: 56px;
+  margin-top: 56px;
+  font-weight: 300 !important;
+  font-size: 30px;
+  text-align: center;
+}
+
+.idt-dashboard__navigation-items {
+  margin-top: 50px;
+  display: flex;
+  max-width: 1000px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  @media(max-width: map-get($breakpoints, small)) {
+   flex-direction: column;
+   margin-top: 0;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.idt-link {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  // white-space: pre-wrap;
+}

@@ -1,0 +1,52 @@
+<div class="idt-create-company-dialog__container margin-top-s">
+    <h3>Fill out the form to create a new company</h3>
+    <form [formGroup]="companyFormGroup">
+      <div class="idt-form-content">
+          <mat-form-field class="idt-add-company__name-field">
+            <input matInput placeholder="Company's Name" formControlName="name" required>
+            <mat-error> {{ getErrorMessage('name') }} </mat-error>
+          </mat-form-field>
+          <mat-form-field class="idt-add-company__description-field">
+              <textarea cdkTextareaAutosize matInput placeholder="Description"[maxlength]="descriptionMaxLength" formControlName="description"></textarea>
+            <mat-hint>{{descriptionLengthRemaining$ | async}}/{{descriptionMaxLength}} characters left </mat-hint>
+            <mat-error> {{ getErrorMessage('description') }} </mat-error>
+          </mat-form-field>
+  
+          <div class="idt-add-company__row-container">
+            <mat-form-field class="margin-right-m idt-add-company__headcount-field">
+              <input matInput type="number" placeholder="Head Count" formControlName="headcount">
+              <mat-error> {{ getErrorMessage('headcount') }} </mat-error>
+            </mat-form-field>
+            <!-- Head Office -->
+            <mat-form-field class="idt-add-company__headoffice-field">
+              <input matInput placeholder="Head Office" formControlName="headoffice">
+              <mat-error> {{ getErrorMessage('headoffice') }} </mat-error>
+            </mat-form-field>
+          </div>
+  
+          <div class="idt-add-company__row-container">
+              <!-- Website -->
+              <mat-form-field class="margin-right-m idt-add-company__website-field">
+                <input matInput placeholder="Website" formControlName="website" required>
+                <mat-error> {{ getErrorMessage('website') }} </mat-error>
+              </mat-form-field>
+      
+              <!-- Industry -->
+              <mat-form-field class="idt-add-company__industry-field">
+                <mat-select placeholder="Industry" formControlName="industry" required>
+                  <mat-option *ngFor="let industry of industries" [(value)]="industry.value">
+                    {{industry.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error> {{ getErrorMessage('industry') }} </mat-error>
+              </mat-form-field>
+            </div>
+  
+      </div>
+      <div class="idt-add-company__actions margin-top-m">
+        <button mat-stroked-button (click)="closeDialog()" color="primary">Cancel</button>
+        <button class="margin-left-3m" mat-raised-button (click)="createCompany()"
+          color="primary">Create Company</button>
+      </div>
+    </form>
+  </div>

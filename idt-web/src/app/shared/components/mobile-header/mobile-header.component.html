@@ -1,0 +1,35 @@
+<div class="idt-header">
+  <mat-toolbar color="primary">
+    <div class="idt-header__wrapper">
+      <div class="idt-header__menu-wrapper">
+          <i (click)="toggleMobileMenu()" class="material-icons md-24">menu</i>
+          <img class="idt-logo margin-left-s" (click)="goToHomepage()" src="../../../assets/images/idt-logo.png">
+      </div>
+
+      <form class="idt-header__search-form" [formGroup]="searchForm">
+        <mat-form-field floatLabel="never" [class.is-filled]="isSearchFilled">
+            <input matInput (input)="onSearch()" placeholder="Search" formControlName="query">
+            <mat-icon class="idt-search-icon" matSuffix>search</mat-icon>
+        </mat-form-field>
+      </form>
+
+    </div>
+  </mat-toolbar>
+</div>
+<div class="idt-mobile-menu" [class.is-opened]="menuOpened">
+  <mat-icon (click)="toggleMobileMenu()" class="idt-mobile-menu__close">close</mat-icon>
+  <a class="test" (click)="goTo('/')">Home</a>
+  <a (click)="goTo('/feed')">Feed</a>
+  <a (click)="goTo('/dashboard')">Dashboard</a>
+  <a (click)="goTo('/cases')">Cases</a>
+  <a (click)="goTo('/companies')">Companies</a>
+  <a (click)="goTo('/about')">About IDT</a>
+  <a (click)="goTo('/profile')">Profile</a>
+  <a *ngIf="userAdmin" (click)="goTo('/admin')">Invite User</a>
+  <a *ngIf="userAdmin" (click)="goTo('/profile/bot')">Bot Cases</a>
+
+  <a *ngIf="!(userLoggedIn$ | async)" mat-raised-button class="idt-mobile-header__login-button"
+    (click)="login()">Login</a>
+  <button mat-raised-button *ngIf="userLoggedIn$ | async" (click)="logout()" mat-button
+    class="idt-header__login-button">Logout</button>
+</div>

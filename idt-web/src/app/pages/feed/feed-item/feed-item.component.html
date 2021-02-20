@@ -1,0 +1,58 @@
+<div class="idt-feed-item-container" (click)="onCaseClick()">
+  <div class="idt-image-container">
+    <img [src]="image" alt="case_image" (error)="image = './../../../../../assets/images/future.jpg'">
+  </div>
+  <div class="idt-filter">
+
+  </div>
+  <div class="idt-content-container">
+    <div class="idt-feed-item-header">
+      <div class="idt-feed-item-header-container">
+
+        <div class="idt-company-logo">
+          <img [src]="logo" (error)="defaultImage($event)" alt="company_logo">
+        </div>
+        <div class="idt-company">
+          <span class="idt-company-name" (click)="onCompanyClick($event)">{{ case.company.name }}</span>
+          <div *ngIf="suggested" class="idt-company-follow" (click)="onFollowCompany($event)"> Follow </div>
+          <div *ngIf="!suggested" class="idt-company-unfollow" (click)="onUnfollowCompany($event)"> Unfollow </div>
+          <div class="idt-industry">
+            {{ industries[case.company.industry].name }}
+          </div>
+          <div class="idt-case-creation">
+            {{ case.createdAt | date}}
+          </div>
+        </div>
+        <div class="idt-creator">
+          <mat-icon>person</mat-icon>
+          <div>{{ case.createdBy.lastName }}, {{ case.createdBy.firstName }}</div>
+        </div>
+        <div class="idt-share-case" (click)="onShareCaseLink($event)">
+          <mat-icon>share</mat-icon>
+        </div>
+      </div>
+      <div class="idt-technology-bar">
+        <mat-chip-list aria-label="Technologies">
+          <mat-chip *ngFor="let technology of case.technologies">{{ technology.name }}</mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+    <div class="idt-feed-item-content">
+      <div class="idt-feed-item-title">
+        {{ case.title }}
+      </div>
+      <div class="idt-feed-item-description" #feedDescription>
+        {{ case.description }}
+      </div>
+    </div>
+    <div class="idt-expand" *ngIf="isDescriptionOverflowing" (click)="onToggleExpand($event)">
+      <div>
+        <span *ngIf="!isExpanded">Read more</span>
+        <br>
+        <mat-icon *ngIf="!isExpanded">expand_more</mat-icon>
+      </div>
+      <mat-icon *ngIf="isExpanded">expand_less</mat-icon>
+    </div>
+    <div class="idt-recommended" *ngIf="suggested">Recommended for you</div>
+  </div>
+</div>

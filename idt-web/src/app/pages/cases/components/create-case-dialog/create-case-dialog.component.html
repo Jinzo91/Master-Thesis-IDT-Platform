@@ -1,0 +1,78 @@
+<div class="idt-create-case-dialog__container margin-top-s">
+  <h3 class="idt-add-case__title">Fill out the form to create a new case</h3>
+  <span class="idt-add-case__info">We will get the basics first and then you can add any details you wish such as technology tags and source
+    files.</span>
+
+  <form [formGroup]="caseFormGroup" class="margin-top-m">
+    <div class="idt-form-content">
+      <mat-form-field class="idt-add-case__title-field">
+        <input matInput placeholder="Title" formControlName="title" required>
+        <mat-error> {{ getErrorMessage('title') }} </mat-error>
+      </mat-form-field>
+      <div class="idt-add-case_row-container">
+        <mat-form-field class="idt-add-case__type-field">
+          <mat-select placeholder="Case Type" formControlName="caseType" required>
+            <mat-option *ngFor="let type of caseTypes" [value]="type.id">
+              {{type.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="idt-add-case__website-field">
+          <input matInput placeholder="Website" formControlName="url">
+          <mat-error> {{ getErrorMessage('url') }} </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="idt-add-case_row-container">
+        <mat-form-field class="idt-add-case__company-field">
+          <mat-select formControlName="company" placeholder="Company" required>
+            <mat-option>
+              <ngx-mat-select-search 
+                [formControl]="serverSideFilteringCtrl" 
+                [searching]="isSearchingForCompanies" 
+                noEntriesFoundLabel="No entries found"
+                placeholderLabel="Search">
+              </ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let company of filteredServerSideCompanies$ | async" [value]="company.id">
+              {{company.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="idt-button-add-company-div">
+          <button mat-stroked-button (click)="openCreateCompanyDialog()" color="primary"> Add Company {{ searchInput }}</button>
+        </div>
+        <div class="idt-add-case__featured-control idt-desktop">
+          <span class="idt-case__form-label idt-featured-label margin-right-m">Featured
+            <i class="material-icons idt-info-icon"
+              matTooltip="A featured case study will appear under hot cases on the dashboard page."
+              matTooltipClass="idt-tooltip" aria-label="">info</i>
+          </span>
+          <mat-slide-toggle formControlName="featured"></mat-slide-toggle>
+        </div>
+      </div>
+      <mat-form-field class="idt-add-case__description-field">
+        <textarea cdkTextareaAutosize matInput placeholder="Description"[maxlength]="descriptionMaxLength" formControlName="description"
+          required></textarea>
+        <mat-hint>{{descriptionLengthRemaining$ | async}}/{{descriptionMaxLength}} characters left </mat-hint>
+        <mat-error> {{ getErrorMessage('description') }} </mat-error>
+        <mat-icon 
+          matSuffix class="idt-info-icon"
+          matTooltipPosition="left"
+          matTooltip="Please avoid jargon, abbreviations and sentences in capital letters. Keep the description simple and concise!"
+          matTooltipClass="idt-tooltip" aria-label="">info</mat-icon>
+      </mat-form-field>
+      </div>
+    <div class="idt-add-case__featured-control idt-mobile">
+      <span class="idt-case__form-label idt-featured-label margin-right-m">Featured
+        <i class="material-icons idt-info-icon"
+          matTooltip="A featured case study will appear under hot cases on the dashboard page."
+          matTooltipClass="idt-tooltip" aria-label="">info</i>
+      </span>
+      <mat-slide-toggle formControlName="featured"></mat-slide-toggle>
+    </div>
+    <div class="idt-add-case__actions margin-top-m">
+      <button mat-stroked-button (click)="closeDialog()" color="primary">Cancel</button>
+      <button class="margin-left-3m" mat-raised-button (click)="createCase()" color="primary" [disabled]="!caseFormGroup.valid">Create Case</button>
+    </div>
+  </form>
+</div>

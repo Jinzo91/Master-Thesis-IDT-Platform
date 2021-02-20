@@ -1,0 +1,5 @@
+<a *ngIf="href" class="idt-link" target="_blank" [attr.href]="href">{{linkText}}<ng-container *ngTemplateOutlet="linkContentTemplate"></ng-container></a>
+<a *ngIf="link" class="idt-link" [routerLink]="link">{{linkText}} <ng-container *ngTemplateOutlet="linkContentTemplate"></ng-container></a>
+<ng-template #linkContentTemplate>
+    <ng-content></ng-content>
+</ng-template>

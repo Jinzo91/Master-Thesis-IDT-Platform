@@ -1,0 +1,8 @@
+{
+    "/auth/login": "/login",
+    "/signup/invite/:hash": "/invite/:hash",
+    "/companies/:id": "/company/:id",
+    "/cases/1": "/cases.1",
+    "/cases/2": "/cases.2",
+    "/cases/3": "/cases.3"
+}

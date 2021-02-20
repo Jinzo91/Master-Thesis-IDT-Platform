@@ -1,0 +1,32 @@
+<div class="user-page">
+  <div class="user-wrapper">
+    <div class="profile-area">
+      <mat-icon class="big-icon">account_circle</mat-icon>
+      <div class="profile-area-text">
+        <a class="profile-area-name">{{fullName}} ({{role}})</a>
+        <br/>
+        <a class="profile-area-email"> <mat-icon class="icons">mail</mat-icon> {{emailValue}}</a>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+<div *ngIf="oneContributor; else noData">
+  <h1 class="contribution-text">Number of Contributed Cases: {{oneContributor[0]['count']}}</h1>
+</div>
+<ng-template #noData>
+  <h1 class="contribution-text">Number of Contributed Cases: N/A</h1>
+</ng-template>
+<div>
+  <div class="idt-case-overview__list margin-top-s">
+    <idt-case-list
+      [data]="cases$"
+      [searchString]="searchString$"
+      [currentPage]="currentPage$"
+      (pageChanged)="currentPage$.next($event)"
+      (pageSizeChanged)="currentPageSize$.next($event)"
+      (sortChanged)="currentSort$.next($event)">
+    </idt-case-list>
+  </div>
+</div>
+
